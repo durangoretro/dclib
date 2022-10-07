@@ -2,6 +2,7 @@
 .PC02
 
 .export _load_background
+.export _clrscr
 
 .proc _load_background: near
     ; Read pointer location
@@ -64,4 +65,27 @@ rle_next:
 ; *** end of code ***
 rle_exit:
 RTS
+.endproc
+
+.proc _clrscr: near
+    ; Init data pointer
+    LDA #>SCREEN_2
+    STA DATA_POINTER+1
+    STZ DATA_POINTER
+    
+    ; Init vmem pointer
+    LDA #>SCREEN_3
+    STA VMEM_POINTER+1
+    STZ VMEM_POINTER
+    
+    loop:
+    LDA (DATA_POINTER),Y
+    STA (VMEM_POINTER),Y
+    INY
+    BNE loop
+	INC DATA_POINTER+1
+	INC VMEM_POINTER+1
+    BPL loop
+
+	RTS
 .endproc
