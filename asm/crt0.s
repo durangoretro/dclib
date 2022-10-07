@@ -11,36 +11,12 @@
 .import    copydata, zerobss, initlib, donelib
 
 .include  "zeropage.inc"
+.include "durango_constants.inc"
 
 ; Enable 65C02 instruction set
 .PC02
 
-; ---------------------------------------------------------------------------
-; DURANGO HARDWARE CONSTANTS
-; ---------------------------------------------------------------------------
-; [HiRes Invert S1 S0    RGB LED NC NC]
-VIDEO_MODE = $df80
-INT_ENABLE = $DFA0
-GAMEPAD1 = $df9c
-GAMEPAD2 = $df9d
 
-; ---------------------------------------------------------------------------
-; DURANGO CRT0 CONSTANTS
-; ---------------------------------------------------------------------------
-GAMEPAD_MODE1 = $00
-GAMEPAD_MODE2 = $01
-GAMEPAD_VALUE1 = $02
-GAMEPAD_VALUE2 = $03
-
-; ---------------------------------------------------------------------------
-; DURANGO LIB CONSTANTS
-; ---------------------------------------------------------------------------
-VMEM_POINTER = $10
-DATA_POINTER = $12
-X_COORD = $14
-Y_COORD = $15
-TEMP1 = $16
-TEMP2 = $17
 
 ; ---------------------------------------------------------------------------
 ; SEGMENT STARTUP

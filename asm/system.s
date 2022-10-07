@@ -1,3 +1,4 @@
+.include "durango_constants.inc"
 .PC02
 
 ; System procedures
@@ -6,9 +7,6 @@
 .export _waitStart
 .export _waitFrames
 .export _halt
-
-; Durango HW constants
-SYNC = $DF88
 
 ; ----- SYSTEM PROCEDURES ---
 .proc _waitVSync: near

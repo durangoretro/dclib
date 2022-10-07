@@ -1,3 +1,4 @@
+.include "durango_constants.inc"
 .PC02
 
 ; Debug procedures
@@ -10,9 +11,6 @@
 .export _startStopwatch
 .export _stopStopwatch
 
-VSP = $df93
-VSP_CONFIG = $df94
-
 ; Debug modes
 DEBUG_HEX = $00
 DEBUG_CHAR = $01
@@ -20,14 +18,6 @@ DEBUG_BINARY = $02
 DEBUG_DECIMAL = $03
 STOPWATCH_START = $FB
 STOPWATCH_STOP = $FC
-
-; Lib zeropage
-VMEM_POINTER = $10
-DATA_POINTER = $12
-X_COORD = $14
-Y_COORD = $15
-TEMP1 = $16
-TEMP2 = $17
 
 ; ------ DEBUG PROCEDURES
 
