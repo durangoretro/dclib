@@ -1,3 +1,5 @@
+.PC02
+
 ; Debug procedures
 .export _consoleLogHex
 .export _consoleLogWord

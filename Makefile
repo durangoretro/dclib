@@ -1,7 +1,7 @@
 ASM_DIR=asm
 BUILD_DIR=bin
 
-all: $(BUILD_DIR)/durango.lib $(BUILD_DIR)/psv.lib
+all: $(BUILD_DIR)/durango.lib $(BUILD_DIR)/psv.lib $(BUILD_DIR)/system.lib
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -18,6 +18,13 @@ $(BUILD_DIR)/psv.o: $(ASM_DIR)/psv.s $(BUILD_DIR)
 
 $(BUILD_DIR)/psv.lib: $(BUILD_DIR)/psv.o $(BUILD_DIR)
 	ar65 r $(BUILD_DIR)/psv.lib $(BUILD_DIR)/psv.o
+	
+	
+$(BUILD_DIR)/system.o: $(ASM_DIR)/system.s $(BUILD_DIR)
+	ca65 -t none $(ASM_DIR)/system.s -o $(BUILD_DIR)/system.o
+
+$(BUILD_DIR)/system.lib: $(BUILD_DIR)/system.o $(BUILD_DIR)
+	ar65 r $(BUILD_DIR)/system.lib $(BUILD_DIR)/system.o
 
 
 
