@@ -31,3 +31,20 @@ X_COORD = $14
 Y_COORD = $15
 TEMP1 = $16
 TEMP2 = $17
+
+; ---------------------------------------------------------------------------
+; VIRTUAL SERIAL PORT CONSTANTS
+; ---------------------------------------------------------------------------
+VSP_FOPEN = $11
+VSP_FREAD = $12
+VSP_FWRITE = $13
+VSP_FCLOSE = $1F
+VSP_HEX = $F0
+VSP_ASCII = $F1
+VSP_BINARY = $F2
+VSP_DECIMAL = $F3
+VSP_STOPWATCH_START = $FB
+VSP_STOPWATCH_STOP = $FC
+VSP_DUMP = $FD
+VSP_STACK = $FE
+VSP_STAT = $FF
