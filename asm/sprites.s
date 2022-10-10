@@ -105,9 +105,17 @@ RTS
     LDA (DATA_POINTER),Y
     STA HEIGHT
     
+    ; Resource pinter
+    LDY #6
+    LDA (DATA_POINTER),Y
+    STA RESOURCE_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    STA RESOURCE_POINTER+1
+    
     LDY WIDTH
     loop:
-    LDA #$33
+    LDA (RESOURCE_POINTER),Y
     STA (VMEM_POINTER),Y
     DEY
     BPL loop
