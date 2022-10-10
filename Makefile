@@ -30,7 +30,7 @@ $(BUILD_DIR)/system.lib: $(BUILD_DIR)/system.o $(BUILD_DIR)
 $(BUILD_DIR)/sprites.o: $(ASM_DIR)/sprites.s $(BUILD_DIR)
 	ca65 -t none $(ASM_DIR)/sprites.s -o $(BUILD_DIR)/sprites.o
 
-$(BUILD_DIR)/system.lib: $(BUILD_DIR)/sprites.o $(BUILD_DIR)
+$(BUILD_DIR)/sprites.lib: $(BUILD_DIR)/sprites.o $(BUILD_DIR)
 	ar65 r $(BUILD_DIR)/sprites.lib $(BUILD_DIR)/sprites.o
 	
 

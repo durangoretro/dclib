@@ -6,6 +6,7 @@
 .export _waitStart
 .export _waitFrames
 .export _halt
+.export _calculate_coords
 
 .proc _waitVSync: near
     ; Wait for vsync end.
