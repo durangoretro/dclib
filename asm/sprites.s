@@ -105,7 +105,7 @@ RTS
     LDA (DATA_POINTER),Y
     STA HEIGHT
     
-    ; Resource pinter
+    ; Resource pointer
     LDY #6
     LDA (DATA_POINTER),Y
     STA RESOURCE_POINTER
