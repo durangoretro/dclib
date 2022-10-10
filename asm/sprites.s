@@ -89,3 +89,7 @@ RTS
 
 	RTS
 .endproc
+
+.proc _draw_sprite: near
+    RTS
+.endproc

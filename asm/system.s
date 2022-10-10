@@ -1,14 +1,12 @@
 .include "durango_constants.inc"
 .PC02
 
-; System procedures
 .export _waitVSync
 .export _readGamepad
 .export _waitStart
 .export _waitFrames
 .export _halt
 
-; ----- SYSTEM PROCEDURES ---
 .proc _waitVSync: near
     ; Wait for vsync end.
     loop1:
@@ -56,4 +54,46 @@
 ; Stop
 .proc _halt: near
     STP
+.endproc
+
+.proc _calculate_coords: near
+    ; Read pointer location
+    STA DATA_POINTER
+    STX DATA_POINTER+1
+    ;LDA X_COORD
+    LDA (DATA_POINTER)
+    STA X_COORD
+    ; LDA Y_COORD
+    LDY #1
+    LDA (DATA_POINTER),y
+    STA Y_COORD
+
+    ; Calculate Y coord
+    STZ VMEM_POINTER
+    LDA Y_COORD
+    LSR
+    ROR VMEM_POINTER
+    LSR
+    ROR VMEM_POINTER
+    ADC #$60
+    STA VMEM_POINTER+1
+    ; Calculate X coord
+    LDA X_COORD
+    LSR
+    CLC
+    ADC VMEM_POINTER
+    STA VMEM_POINTER
+    BCC skip_upper
+    INC VMEM_POINTER+1
+    skip_upper:
+	
+    ; Write mem position to struct
+    LDA VMEM_POINTER
+    LDY #2
+    STA (DATA_POINTER),y
+    LDA VMEM_POINTER+1
+    INY
+    STA (DATA_POINTER),y
+    
+    RTS
 .endproc
