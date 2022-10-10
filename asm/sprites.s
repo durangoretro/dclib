@@ -3,6 +3,7 @@
 
 .export _load_background
 .export _clrscr
+.export _draw_sprite
 
 .proc _load_background: near
     ; Read pointer location
@@ -91,5 +92,25 @@ RTS
 .endproc
 
 .proc _draw_sprite: near
+    ; Read pointer location
+    STA DATA_POINTER
+    STX DATA_POINTER+1
+    
+    ; width & height
+    LDY #4
+    LDA (DATA_POINTER),Y
+    LSR
+    STA WIDTH
+    INY
+    LDA (DATA_POINTER),Y
+    STA HEIGHT
+    
+    LDY WIDTH
+    loop:
+    LDA #$33
+    STA (VMEM_POINTER),Y
+    DEY
+    BPL loop
+
     RTS
 .endproc

@@ -23,14 +23,22 @@ GAMEPAD_VALUE1 = $02
 GAMEPAD_VALUE2 = $03
 
 ; ---------------------------------------------------------------------------
-; DURANGO LIB CONSTANTS
+; DURANGO LIB PAGE ZERO CONSTANTS
 ; ---------------------------------------------------------------------------
-VMEM_POINTER = $10
-DATA_POINTER = $12
+VMEM_POINTER = $10 ; $11
+DATA_POINTER = $12 ; $13
 X_COORD = $14
 Y_COORD = $15
-TEMP1 = $16
-TEMP2 = $17
+HEIGHT = $16
+WIDTH = $17
+RESOURCE_POINTER = $18 ; $19
+TEMP1 = $20
+TEMP2 = $21
+
+; ---------------------------------------------------------------------------
+; DURANGO LIB MEMORY CONSTANTS
+; ---------------------------------------------------------------------------
+TEMP10 = $0200
 
 ; ---------------------------------------------------------------------------
 ; VIRTUAL SERIAL PORT CONSTANTS

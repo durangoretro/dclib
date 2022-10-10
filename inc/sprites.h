@@ -9,5 +9,6 @@ typedef struct{
 
 extern void __fastcall__ load_background(void*);
 extern void __fastcall__ clrscr(void);
+extern void __fastcall__ draw_sprite(void*);
 
 #endif
