@@ -116,6 +116,7 @@ RTS
     LDX HEIGHT
     loop2:
     LDY WIDTH
+    DEY
     loop:
     LDA (RESOURCE_POINTER),Y
     STA (VMEM_POINTER),Y
