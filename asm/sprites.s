@@ -113,12 +113,24 @@ RTS
     LDA (DATA_POINTER),Y
     STA RESOURCE_POINTER+1
     
+    LDX HEIGHT
+    loop2:
     LDY WIDTH
     loop:
     LDA (RESOURCE_POINTER),Y
     STA (VMEM_POINTER),Y
     DEY
     BPL loop
+    
+    CLC
+    LDA VMEM_POINTER
+    ADC #$40
+    STA VMEM_POINTER
+    BCC skip
+    INC VMEM_POINTER+1
+    skip:
+    DEX
+    BPL loop2
 
     RTS
 .endproc
