@@ -129,6 +129,15 @@ RTS
     BCC skip
     INC VMEM_POINTER+1
     skip:
+    
+    CLC
+    LDA RESOURCE_POINTER
+    ADC WIDTH
+    STA RESOURCE_POINTER
+    BCC skip2
+    INC RESOURCE_POINTER+1
+    skip2:
+
     DEX
     BPL loop2
 
