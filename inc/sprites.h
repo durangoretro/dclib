@@ -5,7 +5,7 @@ typedef struct{
     unsigned char x, y;
     unsigned short mem;
     unsigned char width, height;
-    unsigned short resource;
+    void* resource;
 } sprite;
 
 extern void __fastcall__ load_background(void*);

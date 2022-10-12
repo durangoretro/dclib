@@ -96,8 +96,16 @@ RTS
     STA DATA_POINTER
     STX DATA_POINTER+1
     
+    ; Video pointer
+    LDY #2
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER+1
+    
     ; width & height
-    LDY #4
+    INY
     LDA (DATA_POINTER),Y
     LSR
     STA WIDTH
