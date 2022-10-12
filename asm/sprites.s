@@ -91,6 +91,35 @@ RTS
 	RTS
 .endproc
 
+.proc render_sprite: near
+    LDX HEIGHT
+    loop2:
+    LDY WIDTH
+    DEY
+    loop:
+    LDA (RESOURCE_POINTER),Y
+    STA (VMEM_POINTER),Y
+    DEY
+    BPL loop
+    CLC
+    LDA VMEM_POINTER
+    ADC #$40
+    STA VMEM_POINTER
+    BCC skip
+    INC VMEM_POINTER+1
+    skip:
+    CLC
+    LDA RESOURCE_POINTER
+    ADC WIDTH
+    STA RESOURCE_POINTER
+    BCC skip2
+    INC RESOURCE_POINTER+1
+    skip2:
+    DEX
+    BPL loop2
+    RTS
+.endproc
+
 .proc _draw_sprite: near
     ; Read pointer location
     STA DATA_POINTER
@@ -120,39 +149,25 @@ RTS
     INY
     LDA (DATA_POINTER),Y
     STA RESOURCE_POINTER+1
-    
-    LDX HEIGHT
-    loop2:
-    LDY WIDTH
-    DEY
-    loop:
-    LDA (RESOURCE_POINTER),Y
-    STA (VMEM_POINTER),Y
-    DEY
-    BPL loop
-    
-    CLC
-    LDA VMEM_POINTER
-    ADC #$40
-    STA VMEM_POINTER
-    BCC skip
-    INC VMEM_POINTER+1
-    skip:
-    
-    CLC
-    LDA RESOURCE_POINTER
-    ADC WIDTH
-    STA RESOURCE_POINTER
-    BCC skip2
-    INC RESOURCE_POINTER+1
-    skip2:
 
-    DEX
-    BPL loop2
+    JSR render_sprite
 
     RTS
 .endproc
 
 .proc _move_sprite: near
+    ; Read pointer location
+    STA DATA_POINTER
+    STX DATA_POINTER+1
+    
+    ; Video pointer
+    LDY #2
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER+1
+    
+    
     RTS
 .endproc
