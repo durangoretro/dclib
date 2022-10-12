@@ -152,3 +152,7 @@ RTS
 
     RTS
 .endproc
+
+.proc _move_sprite: near
+    RTS
+.endproc
