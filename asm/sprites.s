@@ -187,6 +187,7 @@ RTS
     ; Update x coord
     LDA (DATA_POINTER)
     INA
+    INA
     STA (DATA_POINTER)
     ; Update vmem position
     LDY #2
@@ -217,6 +218,22 @@ RTS
     skip:
     DEX
     BPL loop
+
+    ; Resource pointer
+    LDY #6
+    LDA (DATA_POINTER),Y
+    STA RESOURCE_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    STA RESOURCE_POINTER+1
+    ; VMEM pointer
+    LDY #2
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER+1
+    JSR render_sprite
 
     RTS
 .endproc
