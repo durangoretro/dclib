@@ -166,6 +166,7 @@ RTS
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER
     STA RESOURCE_POINTER
+    STA $df93
     INY
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER+1
@@ -182,6 +183,7 @@ RTS
     SEC
     SBC #$20
     STA RESOURCE_POINTER+1
+    STA $df93
     ; Update x coord
     LDA (DATA_POINTER)
     INA
@@ -208,16 +210,11 @@ RTS
     LDA VMEM_POINTER
     ADC #$40
     STA VMEM_POINTER
+    STA RESOURCE_POINTER
     BCC skip
     INC VMEM_POINTER+1
-    skip:
-    CLC
-    LDA RESOURCE_POINTER
-    ADC WIDTH
-    STA RESOURCE_POINTER
-    BCC skip2
     INC RESOURCE_POINTER+1
-    skip2:
+    skip:
     DEX
     BPL loop
 
