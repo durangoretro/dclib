@@ -182,6 +182,22 @@ RTS
     SEC
     SBC #$20
     STA RESOURCE_POINTER+1
+    ; Update x coord
+    LDA (DATA_POINTER)
+    INA
+    STA (DATA_POINTER)
+    ; Update vmem position
+    LDY #2
+    LDA (DATA_POINTER),Y
+    CLC
+    ADC #1
+    STA (DATA_POINTER),Y
+    BCC skip3
+    INY
+    LDA (DATA_POINTER),Y
+    INA
+    STA (DATA_POINTER),Y
+    skip3:
     ; Copy pixel pair from cache to screen
     LDX HEIGHT
     loop:
