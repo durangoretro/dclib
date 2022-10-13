@@ -4,6 +4,7 @@
 .export _load_background
 .export _clrscr
 .export _draw_sprite
+.export _move_sprite_right
 
 .proc _load_background: near
     ; Read pointer location
@@ -155,7 +156,7 @@ RTS
     RTS
 .endproc
 
-.proc _move_sprite: near
+.proc _move_sprite_right: near
     ; Read pointer location
     STA DATA_POINTER
     STX DATA_POINTER+1
@@ -164,10 +165,45 @@ RTS
     LDY #2
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER
+    STA RESOURCE_POINTER
     INY
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER+1
-    
-    
+    ; width & height
+    INY
+    LDA (DATA_POINTER),Y
+    LSR
+    STA WIDTH
+    INY
+    LDA (DATA_POINTER),Y
+    STA HEIGHT
+    ; Calculate cached background pointer
+    LDA VMEM_POINTER+1
+    SEC
+    SBC #$20
+    STA RESOURCE_POINTER+1
+    ; Copy pixel pair from cache to screen
+    LDX HEIGHT
+    loop:
+    LDA (RESOURCE_POINTER)
+    STA (VMEM_POINTER)
+    ; Next row
+    CLC
+    LDA VMEM_POINTER
+    ADC #$40
+    STA VMEM_POINTER
+    BCC skip
+    INC VMEM_POINTER+1
+    skip:
+    CLC
+    LDA RESOURCE_POINTER
+    ADC WIDTH
+    STA RESOURCE_POINTER
+    BCC skip2
+    INC RESOURCE_POINTER+1
+    skip2:
+    DEX
+    BPL loop
+
     RTS
 .endproc
