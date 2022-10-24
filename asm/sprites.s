@@ -179,9 +179,11 @@ RTS
     STA HEIGHT
     ; Calculate cached background pointer
     LDA VMEM_POINTER+1
+    sta $df93
 	; Use AND instead of SEC
     SEC
     SBC #$20
+    sta $df93
     STA RESOURCE_POINTER+1
     ; Update x coord
     LDA (DATA_POINTER)
