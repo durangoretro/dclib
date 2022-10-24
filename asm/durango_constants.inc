@@ -21,6 +21,7 @@ GAMEPAD_MODE1 = $00
 GAMEPAD_MODE2 = $01
 GAMEPAD_VALUE1 = $02
 GAMEPAD_VALUE2 = $03
+IRQ_ADDR = $0200
 
 ; ---------------------------------------------------------------------------
 ; DURANGO LIB PAGE ZERO CONSTANTS

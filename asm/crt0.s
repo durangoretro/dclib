@@ -75,6 +75,13 @@ _init:
     LDA #$3C
     STA VIDEO_MODE
     
+    ; Set up IRQ subroutine
+    LDA #$7c
+    LDA #<_irq_int
+    STA IRQ_ADDR
+    LDA #<_irq_int
+    STA IRQ_ADDR+1
+    
     ; Initialize interrupts counter
     STZ $0206
     STZ $0207
@@ -189,7 +196,7 @@ _nmi_int:
 
 .segment  "VECTORS"
 
-.addr      _nmi_int    ; NMI vector
+.addr      IRQ_ADDR    ; NMI vector
 .addr      _init       ; Reset vector
 .addr      _irq_int    ; IRQ/BRK vector
 
