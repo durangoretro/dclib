@@ -74,6 +74,12 @@ _init:
     ; Initialize Durango Video
     LDA #$3C
     STA VIDEO_MODE
+    
+    ; Initialize interrupts counter
+    STZ $0206
+    STZ $0207
+    STZ $0208
+    STZ $0209
 
     ; Enable Durango interrupts
     LDA #$01
@@ -114,6 +120,15 @@ _irq_int:
     LDA $103,X
     AND #$10
     BNE _stop
+    ; Increment interrupt counter
+    INC $0206
+    BNE next
+    INC $0207
+    BNE next
+    INC $0208
+    BNE next
+    INC $0209
+    next:
     ; Read controllers
     STA GAMEPAD1
     LDX #8
