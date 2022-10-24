@@ -77,10 +77,11 @@ _init:
     
     ; Set up IRQ subroutine
     LDA #$7c
-    LDA #<_irq_int
     STA IRQ_ADDR
     LDA #<_irq_int
     STA IRQ_ADDR+1
+    LDA #<_irq_int
+    STA IRQ_ADDR+2
     
     ; Initialize interrupts counter
     STZ $0206
