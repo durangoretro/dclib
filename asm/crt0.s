@@ -93,11 +93,6 @@ _init:
     STZ $0208
     STZ $0209
 
-    ; Enable Durango interrupts
-    LDA #$01
-    STA INT_ENABLE
-    CLI
-
     ; Init gamepads
     STA GAMEPAD1
     LDX #8
@@ -110,6 +105,11 @@ _init:
     STA GAMEPAD_MODE1
     STX GAMEPAD_MODE2
     
+    ; Enable Durango interrupts
+    LDA #$01
+    STA INT_ENABLE
+    CLI
+    
     ; Call main()
     JSR _main
 
@@ -120,7 +120,7 @@ _exit:
 
 ; Stop
 _stop:
-    STP
+    BRA _stop
 
 
 ; Maskable interrupt (IRQ) service routine
