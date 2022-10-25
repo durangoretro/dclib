@@ -120,6 +120,7 @@ _exit:
 
 ; Stop
 _stop:
+    STP
     BRA _stop
 
 
