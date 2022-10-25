@@ -81,6 +81,12 @@ _init:
     LDA #>_irq_int
     STA IRQ_ADDR+1
     
+    ; Set up NMI subroutine
+    LDA #<_nmi_int
+    STA NMI_ADDR
+    LDA #>_nmi_int
+    STA NMI_ADDR+1
+    
     ; Initialize interrupts counter
     STZ $0206
     STZ $0207
@@ -191,6 +197,9 @@ _nmi_int:
 
 hw_irq_int:
     JMP (IRQ_ADDR)
+    
+hw_nmi_int:
+    JMP (NMI_ADDR)
 
 ; ---------------------------------------------------------------------------
 ; SEGMENT VECTTORS
@@ -198,7 +207,7 @@ hw_irq_int:
 
 .segment  "VECTORS"
 
-.addr      _nmi_int    ; NMI vector
+.addr      hw_nmi_int    ; NMI vector
 .addr      _init       ; Reset vector
 .addr      hw_irq_int    ; IRQ/BRK vector
 
