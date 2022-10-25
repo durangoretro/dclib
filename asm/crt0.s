@@ -76,12 +76,10 @@ _init:
     STA VIDEO_MODE
     
     ; Set up IRQ subroutine
-    LDA #$7c
+    LDA #<_irq_int
     STA IRQ_ADDR
-    LDA #<_irq_int
+    LDA #>_irq_int
     STA IRQ_ADDR+1
-    LDA #<_irq_int
-    STA IRQ_ADDR+2
     
     ; Initialize interrupts counter
     STZ $0206
@@ -191,15 +189,18 @@ _nmi_int:
     PLA
     RTI
 
+hw_irq_int:
+    JMP (IRQ_ADDR)
+
 ; ---------------------------------------------------------------------------
 ; SEGMENT VECTTORS
 ; ---------------------------------------------------------------------------
 
 .segment  "VECTORS"
 
-.addr      IRQ_ADDR    ; NMI vector
+.addr      _nmi_int    ; NMI vector
 .addr      _init       ; Reset vector
-.addr      _irq_int    ; IRQ/BRK vector
+.addr      hw_irq_int    ; IRQ/BRK vector
 
 ; ---------------------------------------------------------------------------
 ; SEGMENT METADATA
