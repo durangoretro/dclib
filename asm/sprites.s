@@ -108,7 +108,9 @@ RTS
     BRA end_transp
     transp:
     ; else
-    
+    ; Load background in A
+    ; AND mask
+    ; OR sprite
     ; end else
     end_transp:
     DEY
