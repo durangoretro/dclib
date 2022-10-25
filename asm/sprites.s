@@ -93,13 +93,24 @@ RTS
 .endproc
 
 .proc render_sprite: near
-    LDX HEIGHT
     loop2:
     LDY WIDTH
     DEY
     loop:
     LDA (RESOURCE_POINTER),Y
+    TAX
+    ; Check if transparency
+    LDA trtab, X
+    BNE transp
+    ; If not transparent
+    TXA
     STA (VMEM_POINTER),Y
+    BRA end_transp
+    transp:
+    ; else
+    
+    ; end else
+    end_transp:
     DEY
     BPL loop
     CLC
@@ -116,7 +127,7 @@ RTS
     BCC skip2
     INC RESOURCE_POINTER+1
     skip2:
-    DEX
+    DEC HEIGHT
     BPL loop2
     RTS
 .endproc
