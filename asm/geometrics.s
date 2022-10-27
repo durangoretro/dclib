@@ -9,6 +9,7 @@
 .export _drawFullScreen
 .export _drawPixel
 .export _drawRect
+.export _drawFillRect
 .export _drawLine
 
 
@@ -120,6 +121,33 @@ evpix:
 .endproc
 
 .proc _drawRect:near
+    ; Load x coord
+    LDY #$04
+    LDA (sp), Y
+    
+    ; Load y coord
+    LDY #$03
+    LDA (sp), Y
+    
+    ; Load color
+    LDY #$00
+    LDA (sp), Y
+    
+    ; Load height
+    LDY #$01
+    LDA (sp), Y
+
+    ; Load width
+    LDY #$02
+    LDA (sp), Y
+    
+
+    ; Remove args from stack
+    JSR incsp5
+    RTS
+.endproc
+
+.proc _drawFillRect:near
     ; Load x coord
     LDY #$04
     LDA (sp), Y
