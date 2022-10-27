@@ -407,9 +407,10 @@ hl_nowrap:
     LDA (sp), Y
 	STA Y_COORD
     
-    ; Load color			; actually not used here, just transmitted to _drawPixel which expects this value at the very same place
+    ; Load color			; just transmitted to _drawPixel
 ;	LDY #$00
-;	LDA (sp), Y
+	LDA (sp)				; CMOS does not need , Y
+	STA colour
     
     ; Load y2
     LDY #$01
