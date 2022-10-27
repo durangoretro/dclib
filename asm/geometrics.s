@@ -44,7 +44,7 @@
 	LDA (sp)				; CMOS does not need ,Y
 	STA COLOUR				; input for PLOT routine (actually px_col)
     
-	JSR dx_plot				; must call as it has many exit points
+	JSR dxplot				; must call as it has many exit points
 	JMP incsp3   			; Remove args from stack... and exit procedura
 
 ; *** input ***
