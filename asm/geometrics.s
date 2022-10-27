@@ -410,7 +410,7 @@ hl_nowrap:
     ; Load color			; just transmitted to _drawPixel
 ;	LDY #$00
 	LDA (sp)				; CMOS does not need , Y
-	STA colour
+	STA COLOUR
     
     ; Load y2
     LDY #$01
