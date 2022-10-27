@@ -42,10 +42,10 @@
     ; Load color
 ;	LDY #$00
 	LDA (sp)				; CMOS does not need ,Y
-	STA px_col				; input for PLOT routine *** check variable usage
+	STA COLOUR				; input for PLOT routine (actually px_col)
     
-    ; Remove args from stack
-    JSR incsp3
+	JSR dx_plot				; must call as it has many exit points
+	JMP incsp3   			; Remove args from stack... and exit procedura
 
 ; *** input ***
 ; X = x coordinate (<128 in colour, <256 in HIRES)
