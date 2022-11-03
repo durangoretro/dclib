@@ -1,6 +1,9 @@
 .include "durango_constants.inc"
 .PC02
 
+.importzp  sp
+.import incsp4
+
 .export _conio_init
 .export _printf
 
@@ -9,6 +12,9 @@
     STA DATA_POINTER
     STX DATA_POINTER+1
     
+    
+    ; Remove args from stack
+    JSR incsp4
     
     ; Iterator
     LDY #$00
