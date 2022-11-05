@@ -4,6 +4,7 @@
 ;https://github.com/cc65/cc65/tree/master/libsrc/runtime
 .importzp  sp
 .import incsp3
+.import incsp4
 .import incsp5
 
 .export _drawFullScreen
@@ -548,6 +549,12 @@ then_x:						; *** do this if e2 <= dx ***
 l_end:
     ; Remove args from stack... and return to caller
     JMP incsp5
+.endproc
+
+
+.proc _drawCircle: near
+	
+	JMP incsp4
 .endproc
 
 ; *** data ***
