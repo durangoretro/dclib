@@ -12,6 +12,7 @@
 .export _drawRect
 .export _drawFillRect
 .export _drawLine
+.export _drawCircle
 
 
 .proc _drawFullScreen: near
@@ -553,7 +554,23 @@ l_end:
 
 
 .proc _drawCircle: near
-	
+	; Load x coord
+    LDY #$03
+    LDA (sp), Y
+    
+    ; Load y coord
+    LDY #$02
+    LDA (sp), Y
+
+	; Load radio
+    LDY #$01
+    LDA (sp), Y
+
+	; Load color
+    LDY #$00
+    LDA (sp), Y
+        
+	; Remove args from stack
 	JMP incsp4
 .endproc
 
