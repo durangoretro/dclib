@@ -186,10 +186,12 @@
     LDY #2
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER
-    STA RESOURCE_POINTER
+    STA BACKGROUND_POINTER
     INY
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER+1
+    AND #$df
+    STA BACKGROUND_POINTER+1
     
     ; width & height
     INY
@@ -199,11 +201,7 @@
     INY
     LDA (DATA_POINTER),Y
     STA HEIGHT
-    ; Calculate cached background pointer
-    LDA VMEM_POINTER+1
-    ; Use AND instead of SEC
-    AND #$df
-    STA RESOURCE_POINTER+1
+    
     ; Update x coord
     LDA (DATA_POINTER)
     INA
@@ -224,17 +222,17 @@
     ; Copy pixel pair from cache to screen
     LDX HEIGHT
     loop:
-    LDA (RESOURCE_POINTER)
+    LDA (BACKGROUND_POINTER)
     STA (VMEM_POINTER)
     ; Next row
     CLC
     LDA VMEM_POINTER
     ADC #$40
     STA VMEM_POINTER
-    STA RESOURCE_POINTER
+    STA BACKGROUND_POINTER
     BCC skip
     INC VMEM_POINTER+1
-    INC RESOURCE_POINTER+1
+    INC BACKGROUND_POINTER+1
     skip:
     DEX
     BPL loop
@@ -250,9 +248,12 @@
     LDY #2
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER
+    STA BACKGROUND_POINTER
     INY
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER+1
+    AND #$df
+    STA BACKGROUND_POINTER+1
     JSR render_sprite
 
     RTS
