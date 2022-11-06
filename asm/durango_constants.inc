@@ -34,8 +34,10 @@ Y_COORD = $15
 HEIGHT = $16
 WIDTH = $17
 RESOURCE_POINTER = $18 ; $19
-TEMP1 = $20
-TEMP2 = $21
+COLOUR = $20
+TEMP1 = $21
+TEMP2 = $22
+BACKGROUND_POINTER = TEMP1; $21; $22
 
 ; ---------------------------------------------------------------------------
 ; DURANGO LIB MEMORY CONSTANTS
