@@ -98,6 +98,7 @@
     TAX
     ; Check if transparency
     LDA trtab, X
+    STA TEMP3
     BNE transp
     ; If not transparent
     TXA
@@ -106,8 +107,13 @@
     transp:
     ; else
     ; Load background in A
+    LDA (BACKGROUND_POINTER),Y
     ; AND mask
+    AND TEMP3
     ; OR sprite
+    ORA (RESOURCE_POINTER),Y
+    ; Draw on screen
+    STA (VMEM_POINTER),Y
     ; end else
     end_transp:
     DEY
@@ -116,8 +122,10 @@
     LDA VMEM_POINTER
     ADC #$40
     STA VMEM_POINTER
+    STA BACKGROUND_POINTER
     BCC skip
     INC VMEM_POINTER+1
+    INC BACKGROUND_POINTER+1
     skip:
     CLC
     LDA RESOURCE_POINTER
@@ -140,9 +148,12 @@
     LDY #2
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER
+    STA BACKGROUND_POINTER
     INY
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER+1
+    AND #$df
+    STA BACKGROUND_POINTER+1
     
     ; width & height
     INY
@@ -179,6 +190,7 @@
     INY
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER+1
+    
     ; width & height
     INY
     LDA (DATA_POINTER),Y
