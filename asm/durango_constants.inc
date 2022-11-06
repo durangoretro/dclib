@@ -38,6 +38,8 @@ COLOUR = $20
 TEMP1 = $21
 TEMP2 = $22
 BACKGROUND_POINTER = TEMP1; $21; $22
+TEMP3 = $23
+TEMP4 = $24
 
 ; ---------------------------------------------------------------------------
 ; DURANGO LIB MEMORY CONSTANTS
