@@ -5,33 +5,40 @@
 .import incsp4
 
 .export _conio_init
+.export _set_font
 .export _printf
+
+.proc  _conio_init: near    
+    RTS
+.endproc
+
+.proc _set_font: near
+    ; Font pointer
+    STA DATA_POINTER
+    STX DATA_POINTER+1
+    
+    
+    RTS
+.endproc
 
 .proc  _printf: near
     ; Get data pointer from procedure args
     STA DATA_POINTER
     STX DATA_POINTER+1
     
-    
-    ; Remove args from stack
-    JSR incsp4
-    
     ; Iterator
     LDY #$00
     loop:
     LDA (DATA_POINTER),Y
     BEQ end
-    STA VSP
+    ; Current char in A
+    JSR conio
     INY
     BNE loop
     end:
     RTS
 .endproc
 
-
-.proc  _conio_init: near
-    LDA #VSP_ASCII
-    STA VSP_CONFIG
-    
+.proc conio: near
     RTS
 .endproc
