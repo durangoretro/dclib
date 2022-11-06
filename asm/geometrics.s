@@ -584,8 +584,8 @@ px_col	= COLOUR			; pixel colour, in II format (17*index), HIRES expects 0 (blac
 f		= TEMP2				; 16-bit @$22-23
 ddf_x	= f+2				; maybe 8 bit is OK? seems always positive @$24-25
 ddf_y	= ddf_x+2			; starts negative and gets added to f, thus 16-bit @$26-27
-x		= ddf_y+2			; seems 8 bit @$28
-y		= x+1				; 8-bit as well @$29
+x_coord		= ddf_y+2			; seems 8 bit @$28
+y_coord		= x_coord+1				; 8-bit as well @$29
 
 dxcircle:
 ; compute initial f = 1 - radius
@@ -613,45 +613,45 @@ dxcircle:
 	SBC ddf_y+1
 	STA ddf_y+1				; surely there's a much faster way, but...
 ; reset x & y
-	STZ x
+	STZ x_coord
 	LDA radius
-	STA y
+	STA y_coord
 ; draw initial dots
 ;	LDA radius				; already there!
 	CLC
 	ADC y0
 	TAY
 	LDX x0
-	JSR dxplot				; plot(x0, y0+radius)
+	JSR _drawPixel::dxplot				; plot(x0, y0+radius)
 	LDA y0
 	SEC
 	SBC radius
 	TAY
 	LDX x0
-	JSR dxplot				; plot(x0, y0-radius)
+	JSR _drawPixel::dxplot				; plot(x0, y0-radius)
 	LDY y0
 	LDA x0
 	CLC
 	ADC radius
 	TAX
-	JSR dxplot				; plot(x0+radius, y0)
+	JSR _drawPixel::dxplot				; plot(x0+radius, y0)
 	LDY y0
 	LDA x0
 	SEC
 	SBC radius
 	TAX
-	JSR dxplot				; plot(x0-radius, y0)
+	JSR _drawPixel::dxplot				; plot(x0-radius, y0)
 ; main loop while x < y
 loop:
-	LDA x
-	CMP y
+	LDA x_coord
+	CMP y_coord
 	BCC c_cont
 	JMP c_end				; if x >= y, exit
 c_cont:
 ; if f >= 0... means MSB is positive
 		BIT f+1
 		BMI f_neg
-			DEC y
+			DEC y_coord
 			LDA ddf_y		; add 2 to ddF_y
 			CLC
 			ADC #2
@@ -669,7 +669,7 @@ c_cont:
 			ADC f+1
 			STA f+1
 f_neg:
-		INC x
+		INC x_coord
 		LDA ddf_x			; add 2 to ddF_x
 		CLC
 		ADC #2
@@ -689,76 +689,76 @@ f_neg:
 ; do 8 plots per iteration
 	LDA x0
 	CLC
-	ADC x
+	ADC x_coord
 	TAX
 	LDA y0
 	CLC
-	ADC y
+	ADC y_coord
 	TAY
-	JSR dxplot				; plot(x0+x, y0+y)
+	JSR _drawPixel::dxplot				; plot(x0+x, y0+y)
 	LDA x0
 	SEC
-	SBC x
+	SBC x_coord
 	TAX
 	LDA y0
 	CLC
-	ADC y
+	ADC y_coord
 	TAY
-	JSR dxplot				; plot(x0-x, y0+y)
+	JSR _drawPixel::dxplot				; plot(x0-x, y0+y)
 	LDA x0
 	CLC
-	ADC x
+	ADC x_coord
 	TAX
 	LDA y0
 	SEC
-	SBC y
+	SBC y_coord
 	TAY
-	JSR dxplot				; plot(x0+x, y0-y)
+	JSR _drawPixel::dxplot				; plot(x0+x, y0-y)
 	LDA x0
 	SEC
-	SBC x
+	SBC x_coord
 	TAX
 	LDA y0
 	SEC
-	SBC y
+	SBC y_coord
 	TAY
-	JSR dxplot				; plot(x0-x, y0-y)
+	JSR _drawPixel::dxplot				; plot(x0-x, y0-y)
 	LDA x0
 	CLC
-	ADC y
-	TAX
-	LDA y0
-	CLC
-	ADC x
-	TAY
-	JSR dxplot				; plot(x0+y, y0+x)
-	LDA x0
-	SEC
-	SBC y
+	ADC y_coord
 	TAX
 	LDA y0
 	CLC
-	ADC x
+	ADC x_coord
 	TAY
-	JSR dxplot				; plot(x0-y, y0+x)
+	JSR _drawPixel::dxplot				; plot(x0+y, y0+x)
+	LDA x0
+	SEC
+	SBC y_coord
+	TAX
+	LDA y0
+	CLC
+	ADC x_coord
+	TAY
+	JSR _drawPixel::dxplot				; plot(x0-y, y0+x)
 	LDA x0
 	CLC
-	ADC y
+	ADC y_coord
 	TAX
 	LDA y0
 	SEC
-	SBC x
+	SBC x_coord
 	TAY
-	JSR dxplot				; plot(x0+y, y0-x)
+	JSR _drawPixel::dxplot				; plot(x0+y, y0-x)
 	LDA x0
 	SEC
-	SBC y
+	SBC y_coord
 	TAX
 	LDA y0
 	SEC
-	SBC x
+	SBC x_coord
 	TAY
-	JSR dxplot				; plot(x0-y, y0-x)
+	JSR _drawPixel::dxplot				; plot(x0-y, y0-x)
 	JMP loop
 c_end:
 	RTS
