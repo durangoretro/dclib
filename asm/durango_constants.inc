@@ -37,6 +37,7 @@ RESOURCE_POINTER = $18 ; $19
 COLOUR = $20
 TEMP1 = $21
 TEMP2 = $22
+BACKGROUND_POINTER = TEMP1; $21; $22
 
 ; ---------------------------------------------------------------------------
 ; DURANGO LIB MEMORY CONSTANTS
