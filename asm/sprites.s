@@ -255,9 +255,7 @@
     STA VMEM_POINTER+1
     AND #$df
     STA BACKGROUND_POINTER+1
-    JSR render_sprite
-
-    RTS
+    JMP render_sprite
 .endproc
 
 .proc _move_sprite_left: near
@@ -310,9 +308,43 @@
     DEX
     BPL loop
 
+    ; Update x coord
+    LDA (DATA_POINTER)
+    DEA
+    DEA
+    STA (DATA_POINTER)
     
-
-    RTS
+    ; Update vmem position
+    LDY #2
+    LDA (DATA_POINTER),Y
+    SEC
+    SBC #1
+    STA (DATA_POINTER),Y
+    BCS skip3
+    INY
+    LDA (DATA_POINTER),Y
+    DEA
+    STA (DATA_POINTER),Y
+    skip3:    
+    
+    ; Resource pointer
+    LDY #6
+    LDA (DATA_POINTER),Y
+    STA RESOURCE_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    STA RESOURCE_POINTER+1
+    ; VMEM pointer
+    LDY #2
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER
+    STA BACKGROUND_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER+1
+    AND #$df
+    STA BACKGROUND_POINTER+1
+    JMP render_sprite
 .endproc
 
 ; *** transparency data table(s) ***
