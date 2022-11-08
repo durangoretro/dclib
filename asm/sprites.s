@@ -5,6 +5,7 @@
 .export _clrscr
 .export _draw_sprite
 .export _move_sprite_right
+.export _move_sprite_left
 
 .proc _load_background: near
     ; Read pointer location
@@ -255,6 +256,61 @@
     AND #$df
     STA BACKGROUND_POINTER+1
     JSR render_sprite
+
+    RTS
+.endproc
+
+.proc _move_sprite_left: near
+    ; Read pointer location
+    STA DATA_POINTER
+    STX DATA_POINTER+1
+    
+    ; width & height
+    LDY #4
+    LDA (DATA_POINTER),Y
+    LSR
+    STA WIDTH
+    DEA
+    STA TEMP3
+    INY
+    LDA (DATA_POINTER),Y
+    STA HEIGHT
+    
+    ; Set Video pointer on last column
+    LDY #2
+    LDA (DATA_POINTER),Y
+    CLC
+    ADC TEMP3
+    STA VMEM_POINTER
+    STA BACKGROUND_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    BCC skip4
+    INA
+    skip4:
+    STA VMEM_POINTER+1
+    AND #$df
+    STA BACKGROUND_POINTER+1
+    
+    ; Delete last column of sprite
+    LDX HEIGHT
+    loop:
+    LDA (BACKGROUND_POINTER)
+    STA (VMEM_POINTER)
+    ; Next row
+    CLC
+    LDA VMEM_POINTER
+    ADC #$40
+    STA VMEM_POINTER
+    STA BACKGROUND_POINTER
+    BCC skip
+    INC VMEM_POINTER+1
+    INC BACKGROUND_POINTER+1
+    skip:
+    DEX
+    BPL loop
+
+    
 
     RTS
 .endproc
