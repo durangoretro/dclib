@@ -136,7 +136,7 @@
     INC RESOURCE_POINTER+1
     skip2:
     DEC HEIGHT
-    BPL loop2
+    BNE loop2
     RTS
 .endproc
 
