@@ -11,19 +11,12 @@
 .export _startStopwatch
 .export _stopStopwatch
 
-; Debug modes
-DEBUG_HEX = $00
-DEBUG_CHAR = $01
-DEBUG_BINARY = $02
-DEBUG_DECIMAL = $03
-STOPWATCH_START = $FB
-STOPWATCH_STOP = $FC
 
 ; ------ DEBUG PROCEDURES
 
 .proc  _consoleLogHex: near
     ; Set virtual serial port in hex mode
-    LDX #DEBUG_HEX
+    LDX #VSP_HEX
 	STX VSP_CONFIG
     ; Send value to virtual serial port
     STA VSP
@@ -32,7 +25,7 @@ STOPWATCH_STOP = $FC
 
 .proc  _consoleLogWord: near
     ; Set virtual serial port in hex mode
-    LDY #DEBUG_HEX
+    LDY #VSP_HEX
 	STY VSP_CONFIG
     ; Send value to virtual serial port
     STA VSP
@@ -42,7 +35,7 @@ STOPWATCH_STOP = $FC
 
 .proc  _consoleLogBinary: near
     ; Set virtual serial port in hex mode
-    LDX #DEBUG_BINARY
+    LDX #VSP_BINARY
 	STX VSP_CONFIG
     ; Send value to virtual serial port
     STA VSP
@@ -51,7 +44,7 @@ STOPWATCH_STOP = $FC
 
 .proc  _consoleLogDecimal: near
     ; Set virtual serial port in hex mode
-    LDX #DEBUG_DECIMAL
+    LDX #VSP_DECIMAL
 	STX VSP_CONFIG
     ; Send value to virtual serial port
     STA VSP
@@ -60,7 +53,7 @@ STOPWATCH_STOP = $FC
 
 .proc  _consoleLogChar: near
     ; Set virtual serial port in ascii mode
-    LDX #DEBUG_CHAR
+    LDX #VSP_ASCII
     STX VSP_CONFIG
     ; Send value to virtual serial port
     STA VSP
@@ -72,7 +65,7 @@ STOPWATCH_STOP = $FC
     STA DATA_POINTER
     STX DATA_POINTER+1
     ; Set virtual serial port in ascii mode
-    LDA #DEBUG_CHAR
+    LDA #VSP_ASCII
     STA VSP_CONFIG
     ; Iterator
     LDY #$00
@@ -87,13 +80,13 @@ STOPWATCH_STOP = $FC
 .endproc
 
 .proc _startStopwatch: near
-    LDA #STOPWATCH_START
+    LDA #VSP_STOPWATCH_START
     STA VSP_CONFIG
     RTS
 .endproc
 
 .proc _stopStopwatch: near
-    LDA #STOPWATCH_STOP
+    LDA #VSP_STOPWATCH_STOP
     STA VSP_CONFIG
     RTS
 .endproc
