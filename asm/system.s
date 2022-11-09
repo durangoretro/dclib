@@ -1,12 +1,28 @@
 .include "durango_constants.inc"
 .PC02
 
+.export _setHiRes
 .export _waitVSync
 .export _readGamepad
 .export _waitStart
 .export _waitFrames
 .export _halt
 .export _calculate_coords
+
+.proc _setHiRes: near
+	CMP #0
+	BNE hires
+	LDA VIDEO_MODE
+	AND #%01111111
+	STA VIDEO_MODE
+	BRA end
+	hires:
+	LDA VIDEO_MODE
+	ORA #%10000000
+	STA VIDEO_MODE
+	end:
+	RTS
+.endproc
 
 .proc _waitVSync: near
     ; Wait for vsync end.
