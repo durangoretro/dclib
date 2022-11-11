@@ -1,6 +1,9 @@
 .include "durango_constants.inc"
 .PC02
 
+.importzp  sp
+.import incsp1
+
 .export _setHiRes
 .export _waitVSync
 .export _readGamepad
@@ -8,6 +11,8 @@
 .export _waitFrames
 .export _halt
 .export _calculate_coords
+.export _read_keyboard_row
+.export _get_bit
 
 .proc _setHiRes: near
 	CMP #0
@@ -113,4 +118,33 @@
     STA (DATA_POINTER),y
     
     RTS
+.endproc
+
+.proc _read_keyboard_row: near
+    TAY
+    LDA #1
+    CPY #0
+    BEQ exit
+    loop:
+    ASL
+    DEY
+    BNE loop
+    exit:
+    STA $DF9B
+    LDA $DF9B
+    RTS
+.endproc
+
+.proc _get_bit: near
+    TAY
+    LDA (sp)
+    CPY #0
+    BEQ end
+    loop:
+    LSR
+    DEY
+    BNE loop
+    end:
+    AND #%00000001
+    JMP incsp1
 .endproc
