@@ -13,6 +13,7 @@ SCREEN_0 = $0000
 SCREEN_1 = $2000
 SCREEN_2 = $4000
 SCREEN_3 = $6000
+MISTREL_KEYBOARD = $DF9B
 
 ; ---------------------------------------------------------------------------
 ; DURANGO CRT0 CONSTANTS

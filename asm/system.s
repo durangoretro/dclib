@@ -130,8 +130,8 @@
     DEY
     BNE loop
     exit:
-    STA $DF9B
-    LDA $DF9B
+    STA MISTREL_KEYBOARD
+    LDA MISTREL_KEYBOARD
     RTS
 .endproc
 
