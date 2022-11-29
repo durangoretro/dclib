@@ -24,6 +24,7 @@ GAMEPAD_VALUE1 = $02
 GAMEPAD_VALUE2 = $03
 IRQ_ADDR = $0200
 NMI_ADDR = $0202
+KEY_PRESSED = $020A
 
 ; ---------------------------------------------------------------------------
 ; DURANGO LIB PAGE ZERO CONSTANTS
