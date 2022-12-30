@@ -7,7 +7,7 @@
 
 .export _printBCD
 
-
+; Font 5x8
 .proc _printBCD: near
 	; Load Y coord
     LDY #1
