@@ -1,6 +1,6 @@
 #ifndef GLYPH_H
 #define GLYPH_H
 
-extern void __fastcall__ printBCD(long value);
+extern void __fastcall__ printBCD(unsigned char x, unsigned char y, long value);
 
 #endif
