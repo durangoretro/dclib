@@ -2,22 +2,23 @@
 .PC02
 
 .importzp sp
-.import incsp2
+.import incsp8
 .import coords2mem
 
 .export _printBCD
 
 ; Font 5x8
 .proc _printBCD: near
-	; Load Y coord
-    LDY #1
+	; Load X coord
+    LDY #7
     LDA (sp), Y
-    STA X_COORD
+    STA X_COORD    
     
-    ; Load X coord
-    INY
+    ; Load Y coord
+    DEY
     LDA (sp), Y
-    STA Y_COORD    
+    STA Y_COORD
+        
 
     ; Calculate coords
     JSR coords2mem
@@ -25,5 +26,5 @@
     LDA #$22
     STA (VMEM_POINTER)
     
-    JMP incsp2
+    JMP incsp8
 .endproc
