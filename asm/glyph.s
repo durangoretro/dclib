@@ -18,6 +18,14 @@
     DEY
     LDA (sp), Y
     STA Y_COORD
+    
+    ; Load font
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER    
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER+1
         
 
     ; Calculate coords
