@@ -1,7 +1,7 @@
 ASM_DIR=asm
 BUILD_DIR=bin
 
-all: $(BUILD_DIR)/durango.lib $(BUILD_DIR)/psv.lib $(BUILD_DIR)/system.lib $(BUILD_DIR)/sprites.lib $(BUILD_DIR)/geometrics.lib $(BUILD_DIR)/conio.lib
+all: $(BUILD_DIR)/durango.lib $(BUILD_DIR)/psv.lib $(BUILD_DIR)/system.lib $(BUILD_DIR)/sprites.lib $(BUILD_DIR)/geometrics.lib $(BUILD_DIR)/conio.lib $(BUILD_DIR)/glyph.lib
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -43,6 +43,10 @@ $(BUILD_DIR)/conio.o: $(ASM_DIR)/conio.s $(BUILD_DIR)
 $(BUILD_DIR)/conio.lib: $(BUILD_DIR)/conio.o $(BUILD_DIR)
 	ar65 r $(BUILD_DIR)/conio.lib $(BUILD_DIR)/conio.o
 
+$(BUILD_DIR)/glyph.o: $(ASM_DIR)/glyph.s $(BUILD_DIR)
+	ca65 -t none $(ASM_DIR)/glyph.s -o $(BUILD_DIR)/glyph.o
+$(BUILD_DIR)/glyph.lib: $(BUILD_DIR)/glyph.o $(BUILD_DIR)
+	ar65 r $(BUILD_DIR)/glyph.lib $(BUILD_DIR)/glyph.o
 
 clean:
 	rm -Rf $(BUILD_DIR)
