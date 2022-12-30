@@ -3,6 +3,7 @@
 
 .importzp  sp
 .import incsp1
+.import coords2mem
 
 .export _setHiRes
 .export _waitVSync
@@ -90,24 +91,7 @@
     LDA (DATA_POINTER),y
     STA Y_COORD
 
-    ; Calculate Y coord
-    STZ VMEM_POINTER
-    LDA Y_COORD
-    LSR
-    ROR VMEM_POINTER
-    LSR
-    ROR VMEM_POINTER
-    ADC #$60
-    STA VMEM_POINTER+1
-    ; Calculate X coord
-    LDA X_COORD
-    LSR
-    CLC
-    ADC VMEM_POINTER
-    STA VMEM_POINTER
-    BCC skip_upper
-    INC VMEM_POINTER+1
-    skip_upper:
+    JSR coords2mem
 	
     ; Write mem position to struct
     LDA VMEM_POINTER
