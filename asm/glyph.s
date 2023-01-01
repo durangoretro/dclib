@@ -52,35 +52,23 @@
 	LDA (RESOURCE_POINTER),Y
 	; Type first row
 	ASL
-	PHA
 	JSR type_carry
-	PLA
-	
 	ASL
-	PHA
 	JSR type_carry
-	PLA
-
 	ASL
-	PHA
 	JSR type_carry
-	PLA
-
 	ASL
-	PHA
 	JSR type_carry
-	PLA
-
 	ASL
-	PHA
 	JSR type_carry
-	PLA
 
 	RTS
 .endproc
 
 
 .proc type_carry: near
+	; Keep A
+	PHA
 	; If carry set
 	BCC carry_set
 		; Load ink color
@@ -92,7 +80,10 @@
 		LDA PAPER
 	;end if
 	end:
-	JMP type
+	JSR type
+	; Restore A
+	PLA
+	RTS
 .endproc
 
 .proc type: near
