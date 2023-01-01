@@ -62,6 +62,14 @@
 	ASL
 	JSR type_carry
 
+	; Type second row
+
+	RTS
+.endproc
+
+.proc next_row: near
+	
+
 	RTS
 .endproc
 
