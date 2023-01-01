@@ -37,11 +37,12 @@ HEIGHT = $16
 WIDTH = $17
 RESOURCE_POINTER = $18 ; $19
 COLOUR = $20
-TEMP1 = $21
-TEMP2 = $22
-BACKGROUND_POINTER = TEMP1; $21; $22
-TEMP3 = $23
-TEMP4 = $24
+PAPER = $21
+BACKGROUND_POINTER = $22; $22; $23
+TEMP1 = $24
+TEMP2 = $25
+TEMP3 = $26
+TEMP4 = $27
 
 ; ---------------------------------------------------------------------------
 ; DURANGO LIB MEMORY CONSTANTS

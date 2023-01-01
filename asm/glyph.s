@@ -33,6 +33,10 @@
 	STZ TEMP1
 	
 	; Load color
+	LDA #$00
+	STA COLOUR
+	LDA #$FF
+	STA PAPER
 	
 	; type
 	SEC
@@ -47,12 +51,12 @@
 	; If carry set
 	BCC carry_set
 		; Load ink color
-		LDA #$00
+		LDA COLOUR
 	; else
 	BRA end
 	carry_set:
 		; Load paper color
-		LDA #$FF
+		LDA PAPER
 	;end if
 	end:
 	JMP type
