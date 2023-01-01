@@ -39,13 +39,46 @@
 	STA PAPER
 	
 	; type
-	SEC
-	JSR type_carry
-	CLC
-	JSR type_carry
-    
+	LDA #%11111111
+	STA (RESOURCE_POINTER)
+	JSR type_letter
+	
     JMP incsp8
 .endproc
+
+.proc type_letter: near
+	; Load First byte
+	LDY #$00
+	LDA (RESOURCE_POINTER),Y
+	; Type first row
+	ASL
+	PHA
+	JSR type_carry
+	PLA
+	
+	ASL
+	PHA
+	JSR type_carry
+	PLA
+
+	ASL
+	PHA
+	JSR type_carry
+	PLA
+
+	ASL
+	PHA
+	JSR type_carry
+	PLA
+
+	ASL
+	PHA
+	JSR type_carry
+	PLA
+
+	RTS
+.endproc
+
 
 .proc type_carry: near
 	; If carry set
