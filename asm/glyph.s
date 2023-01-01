@@ -31,9 +31,7 @@
     ; Calculate coords
     JSR coords2mem
 	STZ TEMP1
-	LDA #%10000000
-	STA TEMP1
-
+	
 	; Load color
 	LDA #$11
 	JSR type
@@ -60,8 +58,8 @@
 		STA (VMEM_POINTER)
 		; Increment position
 		LDA #%10000000
-		ADC TEMP2
-		STA TEMP2
+		ADC TEMP1
+		STA TEMP1
 	; else
 	BRA end
 	right_pixel:
@@ -80,8 +78,8 @@
 		STA (VMEM_POINTER)
 		; Increment position
 		LDA #%10000000
-		ADC TEMP2
-		STA TEMP2
+		ADC TEMP1
+		STA TEMP1
 		INC VMEM_POINTER
 		BNE end
 		INC VMEM_POINTER+1
