@@ -30,9 +30,39 @@
 
     ; Calculate coords
     JSR coords2mem
-    
-    LDA #$22
-    STA (VMEM_POINTER)
+	STZ TEMP1
+
+	; Load color
+	LDA #$22
+    JSR type
+	JSR type
     
     JMP incsp8
+.endproc
+
+.proc type: near
+	; If left pixel
+	BIT TEMP1
+	BMI right_pixel
+	; then
+		; Keep left pixel from color
+		AND #$F0
+		; Store single color in temp2
+		STA TEMP2
+		; Load original pixel pair
+		LDA (VMEM_POINTER)
+		; Clear left pixel
+		AND #$0F
+		; Paint left pixel
+		ORA TEMP2
+		; Save pixel pair
+		STA (VMEM_POINTER)		
+	; else
+	BRA end
+	right_pixel:
+	; then
+
+	; end if
+	end:
+	RTS
 .endproc
