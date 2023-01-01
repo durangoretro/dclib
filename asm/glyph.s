@@ -33,10 +33,29 @@
 	STZ TEMP1
 	
 	; Load color
-	LDA #$11
-	JSR type
+	
+	; type
+	SEC
+	JSR type_carry
+	CLC
+	JSR type_carry
     
     JMP incsp8
+.endproc
+
+.proc type_carry: near
+	; If carry set
+	BCC carry_set
+		; Load ink color
+		LDA #$00
+	; else
+	BRA end
+	carry_set:
+		; Load paper color
+		LDA #$FF
+	;end if
+	end:
+	JMP type
 .endproc
 
 .proc type: near
