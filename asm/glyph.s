@@ -43,20 +43,32 @@
 	LDA #%10101010
 	STA (RESOURCE_POINTER),Y
 	INY
-	LDA #%01010101
 	STA (RESOURCE_POINTER),Y
 	INY
-	LDA #%10101010
 	STA (RESOURCE_POINTER),Y
 	INY
-	LDA #%01010101
 	STA (RESOURCE_POINTER),Y
+	INY
+	STA (RESOURCE_POINTER),Y
+	INY
+	STA (RESOURCE_POINTER),Y
+	INY
+	STA (RESOURCE_POINTER),Y
+	INY
+	STA (RESOURCE_POINTER),Y
+	JSR type_letter
 	JSR type_letter
 	
     JMP incsp8
 .endproc
 
 .proc type_letter: near
+	; Save vmem pointer
+	LDA VMEM_POINTER
+	PHA
+	LDA VMEM_POINTER+1
+	PHA
+	
 	; Load First byte
 	LDY #$00
 	LDA (RESOURCE_POINTER),Y
@@ -170,8 +182,14 @@
 	JSR type_carry
 	ASL
 	JSR type_carry
-
-	RTS
+	
+	; Restore VMEM POINTER
+	PLA
+	STA VMEM_POINTER+1
+	PLA
+	STA VMEM_POINTER
+	
+	JMP next_letter
 .endproc
 
 .proc next_row: near
@@ -185,6 +203,18 @@
 	INC VMEM_POINTER+1	
 	skip:
 	PLA
+	RTS
+.endproc
+
+.proc next_letter: near
+	STZ TEMP1
+	LDA VMEM_POINTER
+	CLC
+	ADC #3
+	STA VMEM_POINTER
+	BCC skip
+	INC VMEM_POINTER+1	
+	skip:
 	RTS
 .endproc
 
