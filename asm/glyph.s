@@ -39,8 +39,18 @@
 	STA PAPER
 	
 	; type
-	LDA #%11111111
-	STA (RESOURCE_POINTER)
+	LDY #$00
+	LDA #%10101010
+	STA (RESOURCE_POINTER),Y
+	INY
+	LDA #%01010101
+	STA (RESOURCE_POINTER),Y
+	INY
+	LDA #%10101010
+	STA (RESOURCE_POINTER),Y
+	INY
+	LDA #%01010101
+	STA (RESOURCE_POINTER),Y
 	JSR type_letter
 	
     JMP incsp8
@@ -50,7 +60,7 @@
 	; Load First byte
 	LDY #$00
 	LDA (RESOURCE_POINTER),Y
-	; Type first row
+	; Type row 1
 	ASL
 	JSR type_carry
 	ASL
@@ -62,14 +72,119 @@
 	ASL
 	JSR type_carry
 
-	; Type second row
+	; Type row 2
+	JSR next_row
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	LDY #$01
+	LDA (RESOURCE_POINTER),Y
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	
+	; Type row 3
+	JSR next_row
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	
+	; Type row 4
+	JSR next_row
+	ASL
+	JSR type_carry
+	LDY #$02
+	LDA (RESOURCE_POINTER),Y
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	
+	; Type row 5
+	JSR next_row
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	LDY #$03
+	LDA (RESOURCE_POINTER),Y
+	ASL
+	JSR type_carry
+	
+	; Type row 6
+	JSR next_row
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	
+	; Type row 7
+	JSR next_row
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	LDY #$04
+	LDA (RESOURCE_POINTER),Y
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	
+	; Type row 8
+	JSR next_row
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
+	ASL
+	JSR type_carry
 
 	RTS
 .endproc
 
 .proc next_row: near
-	
-
+	PHA
+	STZ TEMP1
+	LDA VMEM_POINTER
+	CLC
+	ADC #62
+	STA VMEM_POINTER
+	BCC skip
+	INC VMEM_POINTER+1	
+	skip:
+	PLA
 	RTS
 .endproc
 
@@ -112,6 +227,7 @@
 		; Save pixel pair
 		STA (VMEM_POINTER)
 		; Increment position
+		CLC
 		LDA #%10000000
 		ADC TEMP1
 		STA TEMP1
@@ -132,6 +248,7 @@
 		; Save pixel pair
 		STA (VMEM_POINTER)
 		; Increment position
+		CLC
 		LDA #%10000000
 		ADC TEMP1
 		STA TEMP1
