@@ -7,10 +7,11 @@
 
 .export _printBCD
 
+; unsigned char x, unsigned char y, void* font, unsigned char color, unsigned char paper, long value
 ; Font 5x8
 .proc _printBCD: near
 	; Load X coord
-    LDY #7
+    LDY #9
     LDA (sp), Y
     STA X_COORD    
     
@@ -22,40 +23,28 @@
     ; Load font
     DEY
     LDA (sp), Y
-    STA RESOURCE_POINTER    
+    STA RESOURCE_POINTER+1    
     DEY
     LDA (sp), Y
-    STA RESOURCE_POINTER+1
+    STA RESOURCE_POINTER
+    
+    ; Load color
+    DEY
+    LDA (sp), Y
+    STA COLOUR
+    
+    ; Load paper
+    DEY
+    LDA (sp), Y
+    STA PAPER
         
 
     ; Calculate coords
     JSR coords2mem
 	STZ TEMP1
 	
-	; Load color
-	LDA #$00
-	STA COLOUR
-	LDA #$FF
-	STA PAPER
 	
 	; type
-	LDY #$00
-	LDA #%10101010
-	STA (RESOURCE_POINTER),Y
-	INY
-	STA (RESOURCE_POINTER),Y
-	INY
-	STA (RESOURCE_POINTER),Y
-	INY
-	STA (RESOURCE_POINTER),Y
-	INY
-	STA (RESOURCE_POINTER),Y
-	INY
-	STA (RESOURCE_POINTER),Y
-	INY
-	STA (RESOURCE_POINTER),Y
-	INY
-	STA (RESOURCE_POINTER),Y
 	JSR type_letter
 	JSR type_letter
 	
