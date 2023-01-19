@@ -7,7 +7,7 @@
 
 .export _printBCD
 
-; unsigned char x, unsigned char y, void* font, unsigned char color, unsigned char paper, long value
+; unsigned char x, unsigned char y, void* font, unsigned char color, unsigned char paper, long (4 bytes) value
 ; Font 5x8
 .proc _printBCD: near
 	; Load X coord
@@ -45,6 +45,12 @@
 	
 	
 	; type
+	JSR type_letter
+	JSR type_letter
+	JSR type_letter
+	JSR type_letter
+	JSR type_letter
+	JSR type_letter
 	JSR type_letter
 	JSR type_letter
 	
