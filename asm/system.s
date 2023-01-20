@@ -1,4 +1,5 @@
 .include "durango_constants.inc"
+.include  "zeropage.inc"
 .PC02
 
 .importzp  sp
@@ -71,7 +72,7 @@
 
 .proc _readGamepad: near
     TAX
-    LDA $02, X
+    LDA GAMEPAD_VALUE1, X
     RTS
 .endproc
 
