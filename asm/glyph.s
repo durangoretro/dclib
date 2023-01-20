@@ -36,25 +36,80 @@
     ; Load paper
     DEY
     LDA (sp), Y
-    STA PAPER
-        
+    STA PAPER        
 
     ; Calculate coords
     JSR coords2mem
 	STZ TEMP1
 	
+	LDY #3
+	LDA (sp), Y
+	jsr draw_byte
 	
-	; type
-	JSR type_letter
-	JSR type_letter
-	JSR type_letter
-	JSR type_letter
-	JSR type_letter
-	JSR type_letter
-	JSR type_letter
-	JSR type_letter
+    LDY #2
+    LDA (sp), Y
+	jsr draw_byte
+    
+    LDY #1
+    LDA (sp), Y
+	jsr draw_byte
+    
+    LDY #0
+    LDA (sp), Y
+	jsr draw_byte
+	
+	;LDA #$11
+	;jsr draw_byte
 	
     JMP incsp8
+.endproc
+
+.proc draw_byte: near
+	PHA
+	LDX RESOURCE_POINTER
+	STX TEMP3
+	LDX RESOURCE_POINTER+1
+	STX TEMP4
+	; Left digit
+	AND #$F0
+	LSR
+	LSR
+	LSR
+	LSR
+	JSR find_letter
+	JSR type_letter
+	; Right digit
+	LDX TEMP3
+	STX RESOURCE_POINTER
+	LDX TEMP4
+	STX RESOURCE_POINTER+1
+	PLA
+	AND #$0F
+	JSR find_letter
+	JSR type_letter
+	; Restore resource pointer
+	LDX TEMP3
+	STX RESOURCE_POINTER
+	LDX TEMP4
+	STX RESOURCE_POINTER+1
+	RTS
+.endproc
+
+.proc find_letter: near
+	TAX
+	BEQ end
+	LDA RESOURCE_POINTER
+	loop:
+	CLC
+	ADC #5
+	STA RESOURCE_POINTER
+	BCC skip
+	INC RESOURCE_POINTER+1
+	skip:
+	DEX
+	BNE loop
+	end:
+	RTS
 .endproc
 
 .proc type_letter: near
