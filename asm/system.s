@@ -14,6 +14,7 @@
 .export _calculate_coords
 .export _read_keyboard_row
 .export _get_bit
+.export _addBCD
 
 .proc _setHiRes: near
 	CMP #0
@@ -131,4 +132,35 @@
     end:
     AND #%00000001
     JMP incsp1
+.endproc
+
+; value1+=value2
+; long* value1, long* value2
+.proc _addBCD: near
+    LDY #4
+    ; Load value1
+    DEY
+    LDA (sp), Y
+    STA DATA_POINTER+1    
+    DEY
+    LDA (sp), Y
+    STA DATA_POINTER
+    
+    ; Load value2
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER+1    
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER
+    
+    LDA (DATA_POINTER)
+    SED
+    CLC
+    ADC (RESOURCE_POINTER)
+    STA (DATA_POINTER)
+    
+    
+    CLD
+    RTS
 .endproc
