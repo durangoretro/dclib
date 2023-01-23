@@ -9,6 +9,7 @@
 .export _setHiRes
 .export _waitVSync
 .export _readGamepad
+.export _readKeyboard
 .export _waitStart
 .export _waitFrames
 .export _halt
@@ -47,12 +48,14 @@
 
 .proc _waitStart: near
     loop:
-    BIT $02
+    BIT GAMEPAD_VALUE1
     BMI exit_loop
     BVS exit_loop
-    BIT $03
+    BIT GAMEPAD_VALUE2
     BMI exit_loop
     BVS exit_loop
+    LDA KEYBOARD_CACHE
+    BNE exit_loop
     BRA loop
     exit_loop:
     RTS
@@ -74,6 +77,12 @@
 .proc _readGamepad: near
     TAX
     LDA GAMEPAD_VALUE1, X
+    RTS
+.endproc
+
+.proc _readKeyboard: near
+    TAX
+    LDA KEYBOARD_CACHE, X
     RTS
 .endproc
 
@@ -117,8 +126,8 @@
     DEY
     BNE loop
     exit:
-    STA MISTREL_KEYBOARD
-    LDA MISTREL_KEYBOARD
+    STA KEYBOARD
+    LDA KEYBOARD
     RTS
 .endproc
 

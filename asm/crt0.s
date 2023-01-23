@@ -155,6 +155,13 @@ _irq_int:
     LDA GAMEPAD2
     EOR GAMEPAD_MODE2
     STA GAMEPAD_VALUE2
+    
+    ; Read keyboard
+    LDA #1
+    STA KEYBOARD
+    LDA KEYBOARD
+    STA KEYBOARD_CACHE
+    
     ; Restore registers and return
     PLX
     PLA

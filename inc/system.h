@@ -7,6 +7,7 @@ extern void __fastcall__ waitVSync(void);
 extern void __fastcall__ waitStart(void);
 extern void __fastcall__ waitFrames(unsigned char);
 extern unsigned char __fastcall__ readGamepad(unsigned char);
+extern unsigned char __fastcall__ readKeyboard(unsigned char);
 extern void __fastcall__ halt(void);
 extern void __fastcall__ calculate_coords(void*);
 extern unsigned char __fastcall__ read_keyboard_row(unsigned char);
@@ -40,5 +41,17 @@ extern void __fastcall__ render_image(void*);
 #define CIAN 0xdd
 #define PINK_FLAMINGO 0xee
 #define WHITE 0xff
+
+// Keyboard
+#define KEY_SPACE 0X80
+#define KEY_INTRO 0X40
+#define KEY_SHIFT 0X20
+#define KEY_P 0X10
+#define KEY_0 0X08
+#define KEY_A 0X04
+#define KEY_Q 0X02
+#define KEY_1 0X01
+
+
 
 #endif
