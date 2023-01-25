@@ -43,37 +43,46 @@ _init:
     ; Display some splash screen
     
     ; ** ROM test **
-    sum		= TEMP1			; included as output parameters
-    chk		= TEMP2				; sum of sums
+    ; * declare some temporary vars *
+sum		= $00			; included as output parameters
+chk		= $01				; sum of sums
+sysptr  = $02
+reset = _init
 
-    ; *** compute checksum *** initial setup is 12b, 16t
-	LDX #>_init			; start page as per interface (MUST be page-aligned!)
-	STX RESOURCE_POINTER+1			; temporary ZP pointer
+; *** compute checksum *** initial setup is 12b, 16t
+	LDX #>reset				; start page as per interface (MUST be page-aligned!)
+    STX sysptr+1			; temporary ZP pointer
 	LDY #0					; this will reset index too
-	STY RESOURCE_POINTER
+	STY sysptr
 	STY sum					; reset values too
 	STY chk
-    ; *** main loop *** original version takes 20b, 426kt for 16KB ~0.28s on Durango-X
-    cs_loop:
-	LDA (RESOURCE_POINTER), Y	; get ROM byte (5+2)
-	CLC
-	ADC sum			; add to previous (3+3+2)
-	STA sum
-	CLC
-	ADC chk			; compute sum of sums too (3+3+2)
-	STA chk
-	INY
-	BNE cs_loop		; complete one page (3..., 6655t per page)
-    CPX #$DE			; just before I/O space?
-	BNE f16_noio
-	INX				; next INX will skip it!
-    f16_noio:
-	INX					; next page (2)
-	STX RESOURCE_POINTER+1		; update pointer (3)
-	BNE cs_loop			; will end at last address! (3...)
+; *** main loop *** original version takes 20b, 426kt for 16KB ~0.28s on Durango-X
+cs_loop:
+			LDA (sysptr), Y	; get ROM byte (5+2)
+            STA VSP
+			CLC
+			ADC sum			; add to previous (3+3+2)
+			STA sum
+			CLC
+			ADC chk			; compute sum of sums too (3+3+2)
+			STA chk
+			INY
+			BNE cs_loop		; complete one page (3..., 6655t per page)
+; *** MUST skip IO page (usually $DF), very little penalty though ***
+		CPX #$DE			; just before I/O space?
+		BNE f16_noio
+			INX				; next INX will skip it!
+f16_noio:
+		INX					; next page (2)
+		STX sysptr+1		; update pointer (3)
+;		CPX af_pg			; VRAM is the limit for downloaded modules, otherwise 0
+		BNE cs_loop			; will end at last address! (3...)
+; *** now compare computed checksum with ZERO *** 4b
+;	LDA chk					; this is the stored value in A, saves two bytes
 	ORA sum					; any non-zero bit will show up
 	BEQ rom_ok				; otherwise, all OK!
-    rom_bad:
+; show minibanner to tell this from RAM error (no display)
+rom_bad:
 		wait_loop:
         INX
         BNE wait_loop
