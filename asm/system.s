@@ -17,6 +17,7 @@
 .export _read_keyboard_row
 .export _get_bit
 .export _addBCD
+.export _subBCD
 .export _render_image
 
 .proc _setHiRes: near
@@ -201,6 +202,64 @@
     CLD
     RTS
 .endproc
+
+; value1+=value2
+; long* value1, long* value2
+.proc _subBCD: near
+    LDY #4
+    ; Load value1
+    DEY
+    LDA (sp), Y
+    STA DATA_POINTER+1    
+    DEY
+    LDA (sp), Y
+    STA DATA_POINTER
+    
+    ; Load value2
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER+1    
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER
+    
+    ; SUB WITH CARRY BYTE 1
+    LDY #0
+    LDA (DATA_POINTER),Y
+    SED
+    SEC
+    SBC (RESOURCE_POINTER),Y
+    STA (DATA_POINTER),Y
+    ; ADD BYTE 2
+    INY
+    LDA (DATA_POINTER),Y
+    SBC (RESOURCE_POINTER),Y
+    STA (DATA_POINTER),Y
+    ; ADD BYTE 3
+    INY
+    LDA (DATA_POINTER),Y
+    SBC (RESOURCE_POINTER),Y
+    STA (DATA_POINTER),Y
+    ; ADD BYTE 4
+    INY
+    LDA (DATA_POINTER),Y
+    SBC (RESOURCE_POINTER),Y
+    STA (DATA_POINTER),Y
+	; If reached end
+	BCS end
+	LDA #$99
+	STA DATA_POINTER
+	STA DATA_POINTER+1
+	STA DATA_POINTER+2
+	STA DATA_POINTER+3
+
+	end:
+    ; CLEAR CARRY AND DECIMAL MODE
+    CLC
+    CLD
+    RTS
+.endproc
+
 
 .proc _render_image: near
     ; Read pointer location
