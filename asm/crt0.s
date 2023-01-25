@@ -77,10 +77,14 @@ f16_noio:
 		STX sysptr+1		; update pointer (3)
 ;		CPX af_pg			; VRAM is the limit for downloaded modules, otherwise 0
 		BNE cs_loop			; will end at last address! (3...)
-; *** now compare computed checksum with ZERO *** 4b
-;	LDA chk					; this is the stored value in A, saves two bytes
-	ORA sum					; any non-zero bit will show up
-	BEQ rom_ok				; otherwise, all OK!
+; *** now compare computed checksum with signature *** 4b
+	LDA sum
+    CMP $DF7B
+    BNE rom_bad
+    LDA chk
+    CMP $DF7C
+    BNE rom_bad			; any non-zero bit will show up
+	BRA rom_ok				; otherwise, all OK!
 ; show minibanner to tell this from RAM error (no display)
 rom_bad:
 		wait_loop:
