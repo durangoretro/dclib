@@ -79,10 +79,10 @@ f16_noio:
 		BNE cs_loop			; will end at last address! (3...)
 ; *** now compare computed checksum with signature *** 4b
 	LDA sum
-    CMP $DF7B
+    CMP SIGNATURE
     BNE rom_bad
     LDA chk
-    CMP $DF7C
+    CMP SIGNATURE+1
     BNE rom_bad			; any non-zero bit will show up
 	BRA rom_ok				; otherwise, all OK!
 ; show minibanner to tell this from RAM error (no display)
