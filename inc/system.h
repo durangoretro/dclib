@@ -12,9 +12,10 @@ extern void __fastcall__ halt(void);
 extern void __fastcall__ calculate_coords(void*);
 extern unsigned char __fastcall__ read_keyboard_row(unsigned char);
 extern unsigned char __fastcall__ get_bit(unsigned char value, unsigned char number);
-extern void __cdecl__ addBCD(long* value1, long* value2);
-extern void __cdecl__ subBCD(long* value1, long* value2);
+extern void __cdecl__ addBCD(long*, long*);
+extern void __cdecl__ subBCD(long*, long*);
 extern void __fastcall__ render_image(void*);
+extern void __fastcall__ getBuildVersion(long*);
 
 // Gamepad keys
 #define BUTTON_A 0x80

@@ -19,6 +19,7 @@
 .export _addBCD
 .export _subBCD
 .export _render_image
+.export _getBuildVersion
 
 .proc _setHiRes: near
 	CMP #0
@@ -318,5 +319,31 @@
 	BNE rle_loop		; no need for BRA
     ; *** end of code ***
     rle_exit:
+    RTS
+.endproc
+
+.proc _getBuildVersion: near
+    ; Read pointer location
+    STA DATA_POINTER
+    STX DATA_POINTER+1
+    
+    ; Read build version
+    LDY #0
+    LDA STAMP+3
+    STA (DATA_POINTER),Y
+    
+    INY
+    LDA STAMP+2    
+    STA (DATA_POINTER),Y
+    
+    INY
+    LDA STAMP+1
+    STA (DATA_POINTER),Y
+    
+    INY
+    LDA STAMP 
+    STA (DATA_POINTER),Y
+    
+    
     RTS
 .endproc

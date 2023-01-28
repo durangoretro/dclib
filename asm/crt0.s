@@ -59,8 +59,7 @@ reset = _init
 ; *** main loop *** original version takes 20b, 426kt for 16KB ~0.28s on Durango-X
 cs_loop:
 			LDA (sysptr), Y	; get ROM byte (5+2)
-            STA VSP
-			CLC
+            CLC
 			ADC sum			; add to previous (3+3+2)
 			STA sum
 			CLC
@@ -287,8 +286,8 @@ hw_nmi_int:
 .byt $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 .byt $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 .byt "BUILD:["
-.byt $00,$00,$00,$00,$00,$00,$00
-.byt "]$"
+.byt $00,$00,$00,$00
+.byt "]$$$$"
 .byt "SIGNATURE:["
 .byt $00,$00
 .byt "]$$"
