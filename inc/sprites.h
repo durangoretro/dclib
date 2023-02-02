@@ -13,5 +13,6 @@ extern void __fastcall__ clrscr(void);
 extern void __fastcall__ draw_sprite(void*);
 extern void __fastcall__ move_sprite_right(void*);
 extern void __fastcall__ move_sprite_left(void*);
+extern void __fastcall__ move_sprite_down(void*);
 
 #endif
