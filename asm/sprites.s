@@ -485,7 +485,18 @@
     STA VMEM_POINTER+1
     AND #$df
     STA BACKGROUND_POINTER+1
-    JMP render_sprite
+    JSR render_sprite
+    
+    ; Copy pixel pair from cache to screen
+    LDY WIDTH
+    DEY
+    loop:
+    LDA (BACKGROUND_POINTER),Y
+    STA (VMEM_POINTER),Y
+    DEY
+    BPL loop
+    
+    RTS
 .endproc
 
 ; *** transparency data table(s) ***
