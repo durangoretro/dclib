@@ -9,9 +9,8 @@
 .export   __STARTUP__ : absolute = 1        ; Mark as startup
 .import __STACKSTART__, __STACKSIZE__
 .import    copydata, zerobss, initlib, donelib
-
-.include  "zeropage.inc"
-.include "durango_constants.inc"
+.include "../asm/durango_constants.inc"
+.include "zeropage.inc"
 
 ; Enable 65C02 instruction set
 .PC02
@@ -279,23 +278,19 @@ hw_nmi_int:
 ; SEGMENT METADATA
 ; ---------------------------------------------------------------------------
 .segment "METADATA"
-.byt $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-.byt $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-.byt $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-.byt $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-.byt $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-.byt $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-.byt "BUILD:["
-.byt $00,$00,$00,$00
-.byt "]$$$$"
-.byt "SIGNATURE:["
-.byt $00,$00
-.byt "]$$"
+.byt "                "
+.byt "                "
+.byt "                "
+.byt "                "
+.byt "                "
+.byt "DCLIB:[########]"
+.byt "BUILD:[####]$$$$"
+.byt "SIGNATURE:[##]$$"
 
 ; ---------------------------------------------------------------------------
 ; SEGMENT HEADER
 ; ---------------------------------------------------------------------------
 .segment "HEADER"
-.byt "DURANGO CC65v0.1"
+.byt "DURANGO CC65v1.0"
 .byt "                "
 .byt "                "

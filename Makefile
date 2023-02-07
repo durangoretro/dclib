@@ -1,5 +1,6 @@
 ASM_DIR=asm
 BUILD_DIR=bin
+RESCOMP = ../rescomp/target/rescomp.jar
 
 all: $(BUILD_DIR)/durango.lib $(BUILD_DIR)/psv.lib $(BUILD_DIR)/system.lib $(BUILD_DIR)/sprites.lib $(BUILD_DIR)/geometrics.lib $(BUILD_DIR)/conio.lib $(BUILD_DIR)/glyph.lib
 
@@ -7,7 +8,7 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 $(BUILD_DIR)/crt0.o: $(ASM_DIR)/crt0.s $(BUILD_DIR)
-	ca65 -t none $(ASM_DIR)/crt0.s -o $(BUILD_DIR)/crt0.o
+	cp $(ASM_DIR)/crt0.s $(BUILD_DIR)/crt0.s && java -jar ${RESCOMP} -m STAMP -n DCLIB -o $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -i $(BUILD_DIR)/crt0.s && ca65 -t none $(BUILD_DIR)/crt0.s -o $(BUILD_DIR)/crt0.o
 	
 $(BUILD_DIR)/durango.lib: $(BUILD_DIR)/crt0.o $(BUILD_DIR)
 	cp /usr/share/cc65/lib/supervision.lib $(BUILD_DIR)/durango.lib && ar65 a $(BUILD_DIR)/durango.lib $(BUILD_DIR)/crt0.o
