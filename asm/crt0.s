@@ -278,11 +278,11 @@ hw_nmi_int:
 ; SEGMENT METADATA
 ; ---------------------------------------------------------------------------
 .segment "METADATA"
-.byt "                "
-.byt "                "
-.byt "                "
-.byt "                "
-.byt "                "
+.byt "TITLE:[         "
+.byt "               ]"
+.byt "AUTHOR:[        "
+.byt "               ]"
+.byt "DATE: ##/##/####"
 .byt "DCLIB:[########]"
 .byt "BUILD:[####]$$$$"
 .byt "SIGNATURE:[##]$$"
