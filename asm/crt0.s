@@ -280,7 +280,7 @@ hw_nmi_int:
 .segment "METADATA"
 .byt "TITLE:[                        ]"
 .byt "AUTHOR:[                       ]"
-.byt "DATE: ##/##/####"
+.byt "DATE[##/##/####]"
 .byt "DCLIB:[########]"
 .byt "BUILD:[####]$$$$"
 .byt "SIGNATURE:[##]$$"
