@@ -175,9 +175,7 @@
     LDA (DATA_POINTER),Y
     STA RESOURCE_POINTER+1
 
-    JSR render_sprite
-
-    RTS
+    JMP render_sprite
 .endproc
 
 .proc _move_sprite_right: near
@@ -498,6 +496,7 @@
     
     RTS
 .endproc
+
 
 ; *** transparency data table(s) ***
 trtab:
