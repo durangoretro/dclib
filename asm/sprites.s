@@ -9,6 +9,7 @@
 .export _move_sprite_down
 .export _move_sprite_up
 .export _clean_sprite
+.export _stamp_sprite
 
 .proc _load_background: near
     ; Read pointer location
@@ -546,6 +547,42 @@
     ; Next interation
     DEX
     BPL loop2
+
+    JMP render_sprite
+.endproc
+
+.proc _stamp_sprite: near
+    ; Read pointer location
+    STA DATA_POINTER
+    STX DATA_POINTER+1
+    
+    ; Video pointer
+    LDY #2
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER
+    STA BACKGROUND_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    AND #$df
+    STA VMEM_POINTER+1
+    STA BACKGROUND_POINTER+1
+    
+    ; width & height
+    INY
+    LDA (DATA_POINTER),Y
+    LSR
+    STA WIDTH
+    INY
+    LDA (DATA_POINTER),Y
+    STA HEIGHT
+    
+    ; Resource pointer
+    LDY #6
+    LDA (DATA_POINTER),Y
+    STA RESOURCE_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    STA RESOURCE_POINTER+1
 
     JMP render_sprite
 .endproc
