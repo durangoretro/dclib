@@ -8,6 +8,7 @@
 .export _move_sprite_left
 .export _move_sprite_down
 .export _move_sprite_up
+.export _clean_sprite
 
 .proc _load_background: near
     ; Read pointer location
@@ -495,6 +496,58 @@
     BPL loop
     
     RTS
+.endproc
+
+.proc _clean_sprite: near
+    ; Read pointer location
+    STA DATA_POINTER
+    STX DATA_POINTER+1
+    
+    ; Video pointer
+    LDY #2
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER
+    STA BACKGROUND_POINTER
+    INY
+    LDA (DATA_POINTER),Y
+    STA VMEM_POINTER+1
+    AND #$df
+    STA BACKGROUND_POINTER+1
+    
+    ; width & height
+    INY
+    LDA (DATA_POINTER),Y
+    LSR
+    STA WIDTH
+    INY
+    LDA (DATA_POINTER),Y
+    STA HEIGHT
+    
+    LDX HEIGHT
+    loop2:
+    ; Copy pixel pair from cache to screen
+    LDY WIDTH
+    DEY
+    loop:
+    LDA (BACKGROUND_POINTER),Y
+    STA (VMEM_POINTER),Y
+    DEY
+    BPL loop
+    ; Increase data pointer one row
+    CLC
+    LDA VMEM_POINTER
+    ADC #$40
+    STA VMEM_POINTER
+    STA BACKGROUND_POINTER
+    BCC skip
+    INC VMEM_POINTER+1
+    INC BACKGROUND_POINTER+1
+    skip:
+    ; Next interation
+    DEX
+    BPL loop2
+
+    JMP render_sprite
 .endproc
 
 

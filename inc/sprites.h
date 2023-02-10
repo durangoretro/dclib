@@ -15,5 +15,6 @@ extern void __fastcall__ move_sprite_right(void*);
 extern void __fastcall__ move_sprite_left(void*);
 extern void __fastcall__ move_sprite_down(void*);
 extern void __fastcall__ move_sprite_up(void*);
+extern void __fastcall__ clean_sprite(void*);
 
 #endif
