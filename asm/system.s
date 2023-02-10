@@ -20,6 +20,8 @@
 .export _subBCD
 .export _render_image
 .export _getBuildVersion
+.export _random_init
+.export _random
 
 .proc _setHiRes: near
 	CMP #0
@@ -353,5 +355,44 @@
     STA (DATA_POINTER),Y
     
     
+    RTS
+.endproc
+
+.proc _random_init:near
+    STA RANDOM_SEED
+    STX RANDOM_SEED+1
+    RTS
+.endproc
+
+.proc _random: near
+    ; *** generate random number ***
+    ; based on code from https://codebase64.org/doku.php?id=base:small_fast_16-bit_prng
+    rnd:
+    LDA RANDOM_SEED
+    BEQ lo_z
+    ASL RANDOM_SEED
+    LDA RANDOM_SEED+1
+    ROL
+    BCC no_eor
+    do_eor:
+    STA RANDOM_SEED+1
+    do_eor2:
+    LDA RANDOM_SEED
+    EOR #$2D
+    STA RANDOM_SEED
+    BRA end
+    lo_z:
+    LDA RANDOM_SEED+1
+    BEQ do_eor2
+    ASL
+    BEQ no_eor
+    BCS do_eor
+    no_eor:
+    STA RANDOM_SEED+1
+    BRA end
+    
+    end:
+    LDA RANDOM_SEED
+    LDX RANDOM_SEED+1
     RTS
 .endproc

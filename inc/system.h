@@ -16,6 +16,8 @@ extern void __cdecl__ addBCD(long*, long*);
 extern void __cdecl__ subBCD(long*, long*);
 extern void __fastcall__ render_image(void*);
 extern void __fastcall__ getBuildVersion(long*);
+extern void __fastcall__ random_init(int);
+extern int __fastcall__ random(void);
 
 // Gamepad keys
 #define BUTTON_A 0x80
