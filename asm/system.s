@@ -20,6 +20,7 @@
 .export _subBCD
 .export _render_image
 .export _getBuildVersion
+.export _getDCLIBVersion
 .export _random_init
 .export _random
 
@@ -354,6 +355,28 @@
     LDA STAMP 
     STA (DATA_POINTER),Y
     
+    
+    RTS
+.endproc
+
+.proc _getDCLIBVersion: near
+    ; Read pointer location
+    STA DATA_POINTER
+    STX DATA_POINTER+1
+    
+    ; Read build version
+    LDX #7
+    LDY #7
+    loop:
+    LDA DCLIB_VERSION,X
+    STA (DATA_POINTER),Y
+    DEx
+    DEy
+    BPL loop
+    
+    LDY #8
+    LDA #0
+    STA (DATA_POINTER),Y
     
     RTS
 .endproc
