@@ -1,8 +1,10 @@
 ASM_DIR=asm
+RES_DIR=res
 BUILD_DIR=bin
+INC_DIR=inc
 RESCOMP = ../rescomp/target/rescomp.jar
 
-all: $(BUILD_DIR)/durango.lib $(BUILD_DIR)/psv.lib $(BUILD_DIR)/system.lib $(BUILD_DIR)/sprites.lib $(BUILD_DIR)/geometrics.lib $(BUILD_DIR)/conio.lib $(BUILD_DIR)/glyph.lib
+all: $(BUILD_DIR)/durango.lib $(BUILD_DIR)/system.lib $(INC_DIR)/font.h $(BUILD_DIR)/psv.lib $(BUILD_DIR)/sprites.lib $(BUILD_DIR)/geometrics.lib $(BUILD_DIR)/conio.lib $(BUILD_DIR)/glyph.lib
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -15,6 +17,9 @@ $(BUILD_DIR)/durango.lib: $(BUILD_DIR)/crt0.o $(BUILD_DIR)
 
 $(BUILD_DIR)/common.o: $(ASM_DIR)/common.s $(BUILD_DIR)
 	ca65 -t none $(ASM_DIR)/common.s -o $(BUILD_DIR)/common.o
+
+$(INC_DIR)/font.h: ${RES_DIR}/font.png
+	java -jar ${RESCOMP} -n font -m FONT -i ${RES_DIR}/font.png -h 8 -w 5 -o $(INC_DIR)/font.h
 
 
 $(BUILD_DIR)/psv.o: $(ASM_DIR)/psv.s $(BUILD_DIR)
@@ -50,4 +55,4 @@ $(BUILD_DIR)/glyph.lib: $(BUILD_DIR)/glyph.o $(BUILD_DIR)
 	ar65 r $(BUILD_DIR)/glyph.lib $(BUILD_DIR)/glyph.o
 
 clean:
-	rm -Rf $(BUILD_DIR)
+	rm -Rf $(BUILD_DIR) $(INC_DIR)/font.h
