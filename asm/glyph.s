@@ -106,25 +106,7 @@
     LDA (sp), Y
 	STA DATA_POINTER
 	
-	
-	; Set virtual serial port in ascii mode
-    LDA #VSP_ASCII
-    STA VSP_CONFIG
-    
-    ; Iterate string
-    LDY #$00
-    loop:
-    LDA (DATA_POINTER),Y
-    BEQ end
-    STA VSP
-    PHY
-    JSR find_letter
-	JSR type_letter
-    PLY
-    INY
-    BNE loop
-    end:
-    RTS
+	JMP draw_str
 .endproc
 
 .proc draw_byte: near
@@ -156,6 +138,37 @@
 	LDX TEMP4
 	STX RESOURCE_POINTER+1
 	RTS
+.endproc
+
+.proc draw_str: near
+	; Set virtual serial port in ascii mode
+    LDA #VSP_ASCII
+    STA VSP_CONFIG
+    
+    LDX RESOURCE_POINTER
+	STX TEMP3
+	LDX RESOURCE_POINTER+1
+	STX TEMP4
+    
+    ; Iterate string
+    LDY #$00
+    loop:
+    LDA (DATA_POINTER),Y
+    BEQ end
+    STA VSP
+    PHY
+    JSR find_letter
+	JSR type_letter
+	; Restore resource pointer
+	LDX TEMP3
+	STX RESOURCE_POINTER
+	LDX TEMP4
+	STX RESOURCE_POINTER+1
+    PLY
+    INY
+    BNE loop
+    end:
+    RTS
 .endproc
 
 .proc find_letter: near
