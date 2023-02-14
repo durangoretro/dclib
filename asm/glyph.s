@@ -141,10 +141,7 @@
 .endproc
 
 .proc draw_str: near
-	; Set virtual serial port in ascii mode
-    LDA #VSP_ASCII
-    STA VSP_CONFIG
-    
+	; Backup resource pointer
     LDX RESOURCE_POINTER
 	STX TEMP3
 	LDX RESOURCE_POINTER+1
@@ -155,7 +152,6 @@
     loop:
     LDA (DATA_POINTER),Y
     BEQ end
-    STA VSP
     PHY
     JSR find_letter
 	JSR type_letter
