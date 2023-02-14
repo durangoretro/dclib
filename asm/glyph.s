@@ -6,6 +6,7 @@
 .import coords2mem
 
 .export _printBCD
+.export _printStr
 
 ; unsigned char x, unsigned char y, void* font, unsigned char color, unsigned char paper, long (4 bytes) value
 ; Font 5x8
@@ -62,6 +63,64 @@
 	;jsr draw_byte
 	
     JMP incsp8
+.endproc
+
+.proc  _printStr: near
+    ; Load X coord
+    LDY #7
+    LDA (sp), Y
+    STA X_COORD    
+    
+    ; Load Y coord
+    DEY
+    LDA (sp), Y
+    STA Y_COORD
+    
+    ; Load font
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER+1    
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER
+    
+    ; Load color
+    DEY
+    LDA (sp), Y
+    STA COLOUR
+    
+    ; Load paper
+    DEY
+    LDA (sp), Y
+    STA PAPER        
+
+    ; Calculate coords
+    JSR coords2mem
+	STZ TEMP1
+    
+    ; String pointer
+    LDY #1
+    LDA (sp), Y
+    STA DATA_POINTER+1
+    LDY #0
+    LDA (sp), Y
+	STA DATA_POINTER
+	
+	
+	; Set virtual serial port in ascii mode
+    LDA #VSP_ASCII
+    STA VSP_CONFIG
+    
+    ; Iterate string
+    LDY #$00
+    loop:
+    LDA (DATA_POINTER),Y
+    BEQ end
+    STA VSP
+    INY
+    BNE loop
+    end:
+    RTS
 .endproc
 
 .proc draw_byte: near
