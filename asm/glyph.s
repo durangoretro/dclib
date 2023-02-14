@@ -117,6 +117,10 @@
     LDA (DATA_POINTER),Y
     BEQ end
     STA VSP
+    PHY
+    JSR find_letter
+	JSR type_letter
+    PLY
     INY
     BNE loop
     end:
