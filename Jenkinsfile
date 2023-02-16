@@ -5,8 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-			RESCOMP = ../fun_rescomp/target/rescomp.jar
-			make clean all
+			make clean all RESCOMP=../fun_rescomp/target/rescomp.jar
                 '''
             }
         }
