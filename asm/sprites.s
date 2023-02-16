@@ -548,7 +548,7 @@
     DEX
     BPL loop2
 
-    JMP render_sprite
+    RTS
 .endproc
 
 .proc _stamp_sprite: near
