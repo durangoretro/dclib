@@ -10,6 +10,7 @@
 .export _move_sprite_up
 .export _clean_sprite
 .export _stamp_sprite
+.export _check_collisions
 
 .proc _load_background: near
     ; Read pointer location
@@ -585,6 +586,11 @@
     STA RESOURCE_POINTER+1
 
     JMP render_sprite
+.endproc
+
+.proc _check_collisions: near
+    LDA #0
+    RTS
 .endproc
 
 
