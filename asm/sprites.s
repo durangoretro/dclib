@@ -1,6 +1,9 @@
 .include "durango_constants.inc"
 .PC02
 
+.importzp sp
+.import incsp4
+
 .export _load_background
 .export _clrscr
 .export _draw_sprite
@@ -589,6 +592,23 @@
 .endproc
 
 .proc _check_collisions: near
+    ; Load first parameter
+    LDY #3
+    LDA (sp), Y
+    STA DATA_POINTER+1    
+    DEY
+    LDA (sp), Y
+    STA DATA_POINTER
+    
+    ; Load second parameter
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER+1    
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER
+    
+    JSR incsp4
     LDA #0
     RTS
 .endproc
