@@ -68,15 +68,22 @@ reset = _init
 	BNE cs_loop		; complete one page (3..., 6655t per page)
     
     ; *** MUST skip IO page (usually $DF), very little penalty though ***
-    CPX #$DE			; just before I/O space?
-	BNE f16_noio    
-	INX ; skip IO page
-    f16_noio:
-	INX					; next page (2)
-	STX sysptr+1		; update pointer (3)
-;	CPX af_pg			; VRAM is the limit for downloaded modules, otherwise 0
-	BNE cs_loop			; will end at last address! (3...)
+    CPX #$FE    ; just before last page
+    BEQ cs_end
     
+    CPX #$DE	; just before I/O space?
+	BNE cs_next
+    
+    ; skip IO page
+	INX
+    
+    ; next page
+    cs_next:
+	INX
+	STX sysptr+1
+    BRA cs_loop
+    
+    cs_end:
     ; *** now compare computed checksum with signature *** 4b
 	LDA sum
     CMP SIGNATURE
