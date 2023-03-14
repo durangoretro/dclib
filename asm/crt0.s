@@ -56,26 +56,28 @@ reset = _init
 	STY sum					; reset values too
 	STY chk
 ; *** main loop *** original version takes 20b, 426kt for 16KB ~0.28s on Durango-X
-cs_loop:
-			LDA (sysptr), Y	; get ROM byte (5+2)
-            CLC
-			ADC sum			; add to previous (3+3+2)
-			STA sum
-			CLC
-			ADC chk			; compute sum of sums too (3+3+2)
-			STA chk
-			INY
-			BNE cs_loop		; complete one page (3..., 6655t per page)
-; *** MUST skip IO page (usually $DF), very little penalty though ***
-		CPX #$DE			; just before I/O space?
-		BNE f16_noio
-			INX				; next INX will skip it!
-f16_noio:
-		INX					; next page (2)
-		STX sysptr+1		; update pointer (3)
-;		CPX af_pg			; VRAM is the limit for downloaded modules, otherwise 0
-		BNE cs_loop			; will end at last address! (3...)
-; *** now compare computed checksum with signature *** 4b
+    cs_loop:
+	LDA (sysptr), Y	; get ROM byte (5+2)
+    CLC
+	ADC sum			; add to previous (3+3+2)
+	STA sum
+	CLC
+	ADC chk			; compute sum of sums too (3+3+2)
+	STA chk
+	INY
+	BNE cs_loop		; complete one page (3..., 6655t per page)
+    
+    ; *** MUST skip IO page (usually $DF), very little penalty though ***
+    CPX #$DE			; just before I/O space?
+	BNE f16_noio    
+	INX ; skip IO page
+    f16_noio:
+	INX					; next page (2)
+	STX sysptr+1		; update pointer (3)
+;	CPX af_pg			; VRAM is the limit for downloaded modules, otherwise 0
+	BNE cs_loop			; will end at last address! (3...)
+    
+    ; *** now compare computed checksum with signature *** 4b
 	LDA sum
     CMP SIGNATURE
     BNE rom_bad
@@ -83,18 +85,19 @@ f16_noio:
     CMP SIGNATURE+1
     BNE rom_bad			; any non-zero bit will show up
 	BRA rom_ok				; otherwise, all OK!
-; show minibanner to tell this from RAM error (no display)
-rom_bad:
-		wait_loop:
-        INX
-        BNE wait_loop
-        INY
-        BNE wait_loop
-        EOR #$01
-        STA INT_ENABLE
-        BRA wait_loop
+    
+    ; Display wrong checksum by blinking error led
+    rom_bad:
+	wait_loop:
+    INX
+    BNE wait_loop
+    INY
+    BNE wait_loop
+    EOR #$01
+    STA INT_ENABLE
+    BRA wait_loop
+    
     rom_ok:
-
     ; Clean up RAM
     LDA #$00
     LDX #$00
