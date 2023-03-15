@@ -275,7 +275,7 @@ hw_nmi_int:
     JMP (NMI_ADDR)
 
 ; ---------------------------------------------------------------------------
-; SEGMENT VECTTORS
+; SEGMENT VECTORS
 ; ---------------------------------------------------------------------------
 
 .segment  "VECTORS"
@@ -283,6 +283,15 @@ hw_nmi_int:
 .addr      hw_nmi_int    ; NMI vector
 .addr      _init       ; Reset vector
 .addr      hw_irq_int    ; IRQ/BRK vector
+
+
+; ---------------------------------------------------------------------------
+; SEGMENT HEADER
+; ---------------------------------------------------------------------------
+.segment "HEADER"
+.byt "DURANGO CC65v1.0"
+.byt "                "
+.byt "                "
 
 ; ---------------------------------------------------------------------------
 ; SEGMENT METADATA
@@ -294,25 +303,6 @@ hw_nmi_int:
 .byt "DCLIB:[########]"
 .byt "BUILD:[####]$$$$"
 .byt "SIGNATURE:[##]$$"
-
-; ---------------------------------------------------------------------------
-; SEGMENT HEADER
-; ---------------------------------------------------------------------------
-.segment "HEADER"
-.byt "DURANGO CC65v1.0"
-.byt "                "
-.byt "                "
-
-; ---------------------------------------------------------------------------
-; SEGMENT FOOTER
-; ---------------------------------------------------------------------------
-.segment "FOOTER"
-.byt "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]"
-.byt "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]"
-.byt "ZZZZZZZZZZZZZZZZ"
-.byt "ZZZZZZZZZZZZZZZZ"
-.byt "ZZZZZZZZZZZZZZZZ"
-.byt "ZZZZZZZZZZZZZZZZ"
 .byt "#"
 JMP($FFFC)
 .byt "## FOOTER ##"

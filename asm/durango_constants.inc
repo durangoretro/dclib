@@ -26,9 +26,9 @@ KEYBOARD_CACHE = $04
 IRQ_ADDR = $0200
 NMI_ADDR = $0202
 KEY_PRESSED = $020A
-SIGNATURE = $DF7B
-DCLIB_VERSION = $DF57
-STAMP = $DF67
+SIGNATURE = $FFDB
+DCLIB_VERSION = $FF9D
+STAMP = $FFC7
 
 ; ---------------------------------------------------------------------------
 ; DURANGO LIB PAGE ZERO CONSTANTS
