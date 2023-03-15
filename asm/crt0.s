@@ -305,4 +305,4 @@ hw_nmi_int:
 .byt "SIGNATURE:[##]$$"
 .byt "#"
 JMP($FFFC)
-.byt "## FOOTER ##"
+.byt "############"
