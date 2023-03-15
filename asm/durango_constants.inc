@@ -27,7 +27,7 @@ IRQ_ADDR = $0200
 NMI_ADDR = $0202
 KEY_PRESSED = $020A
 SIGNATURE = $FFDB
-DCLIB_VERSION = $FF9D
+DCLIB_VERSION = $FFB7
 STAMP = $FFC7
 
 ; ---------------------------------------------------------------------------
