@@ -307,6 +307,8 @@ hw_nmi_int:
 ; SEGMENT FOOTER
 ; ---------------------------------------------------------------------------
 .segment "FOOTER"
+.byt "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]"
+.byt "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX]"
 .byt "ZZZZZZZZZZZZZZZZ"
 .byt "ZZZZZZZZZZZZZZZZ"
 .byt "ZZZZZZZZZZZZZZZZ"
