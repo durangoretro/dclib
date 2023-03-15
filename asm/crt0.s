@@ -307,6 +307,10 @@ hw_nmi_int:
 ; SEGMENT FOOTER
 ; ---------------------------------------------------------------------------
 .segment "FOOTER"
+.byt "ZZZZZZZZZZZZZZZZ"
+.byt "ZZZZZZZZZZZZZZZZ"
+.byt "ZZZZZZZZZZZZZZZZ"
+.byt "ZZZZZZZZZZZZZZZZ"
 .byt "#"
 JMP($FFFC)
 .byt "## FOOTER ##"
