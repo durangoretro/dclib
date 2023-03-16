@@ -3,6 +3,7 @@
 
 .importzp sp
 .import incsp8
+.import incsp2
 .import coords2mem
 
 .export _printBCD
@@ -62,7 +63,8 @@
 	;LDA #$11
 	;jsr draw_byte
 	
-    JMP incsp8
+    JSR incsp8
+    JMP incsp2
 .endproc
 
 .proc  _printStr: near
@@ -104,9 +106,12 @@
     STA DATA_POINTER+1
     LDY #0
     LDA (sp), Y
-	STA DATA_POINTER
+    STA DATA_POINTER
 	
-	JMP draw_str
+    JSR draw_str
+    JMP incsp8
+	
+	
 .endproc
 
 .proc draw_byte: near
