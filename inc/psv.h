@@ -10,5 +10,6 @@ extern void __fastcall__ consoleLogChar(unsigned char);
 extern void __fastcall__ consoleLogStr(char *str);
 extern void __fastcall__ startStopwatch(void);
 extern void __fastcall__ stopStopwatch(void);
+extern void __fastcall__ psvDump(void);
 
 #endif

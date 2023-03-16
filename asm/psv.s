@@ -10,6 +10,7 @@
 .export _consoleLogStr
 .export _startStopwatch
 .export _stopStopwatch
+.export _psvDump
 
 
 ; ------ DEBUG PROCEDURES
@@ -87,6 +88,12 @@
 
 .proc _stopStopwatch: near
     LDA #VSP_STOPWATCH_STOP
+    STA VSP_CONFIG
+    RTS
+.endproc
+
+.proc _psvDump: near
+    LDA #VSP_DUMP
     STA VSP_CONFIG
     RTS
 .endproc
