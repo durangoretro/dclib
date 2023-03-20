@@ -5,7 +5,7 @@ CFG ?= ../cfg/durango16k.cfg
 DCLIB ?= ../bin
 DCINC ?= ../inc
 
-all: $(BUILD_DIR)/test_sprites.dut $(BUILD_DIR)/test_qgraph.dut
+all: $(BUILD_DIR)/test_sprites.dux $(BUILD_DIR)/test_qgraph.dux
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -23,10 +23,6 @@ $(BUILD_DIR)/test_qgraph.bin: $(BUILD_DIR)/test_qgraph.o
 	ld65 -C $(CFG) $(BUILD_DIR)/test_qgraph.o $(DCLIB)/qgraph.lib $(DCLIB)/durango.lib $(DCLIB)/psv.lib -o $(BUILD_DIR)/test_qgraph.bin	
 $(BUILD_DIR)/test_qgraph.dux: $(BUILD_DIR)/test_qgraph.bin
 	java -jar ${RESCOMP} -m SIGNER -n $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -i $(BUILD_DIR)/test_qgraph.bin -o $(BUILD_DIR)/test_qgraph.dux
-$(BUILD_DIR)/test_qgraph.dut: $(BUILD_DIR)/pad.bin $(BUILD_DIR)/test_qgraph.dux
-	cat $(BUILD_DIR)/pad.bin $(BUILD_DIR)/test_qgraph.dux > $(BUILD_DIR)/test_qgraph.dut
-
-
 
 
 $(BUILD_DIR)/test_sprites.casm: $(BUILD_DIR) $(SOURCE_DIR)/test_sprites.c
@@ -36,13 +32,9 @@ $(BUILD_DIR)/test_sprites.o: $(BUILD_DIR)/test_sprites.casm
 $(BUILD_DIR)/test_sprites.bin: $(BUILD_DIR)/test_sprites.o
 	ld65 -C $(CFG) $(BUILD_DIR)/test_sprites.o $(DCLIB)/sprites.lib $(DCLIB)/durango.lib $(DCLIB)/psv.lib -o $(BUILD_DIR)/test_sprites.bin	
 $(BUILD_DIR)/test_sprites.dux: $(BUILD_DIR)/test_sprites.bin
-	java -jar ${RESCOMP} -m SIGNER -n $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -i $(BUILD_DIR)/test_sprites.bin -o $(BUILD_DIR)/test_sprites.dux
-$(BUILD_DIR)/test_sprites.dut: $(BUILD_DIR)/pad.bin $(BUILD_DIR)/test_sprites.dux
-	cat $(BUILD_DIR)/pad.bin $(BUILD_DIR)/test_sprites.dux > $(BUILD_DIR)/test_sprites.dut
+	java -jar ${RESCOMP} -m SIGNER -n $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -i $(BUILD_DIR)/test_sprites.bin -o $(BUILD_DIR)/test_sprites.dux	
 	
-	
-	
-	
+
 
 clean:
 	rm -Rf $(BUILD_DIR)
