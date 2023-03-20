@@ -2,6 +2,8 @@ import durango_testing
 
 def test_fillScreen():
     internal_fillScreen(0x11)
+    internal_fillScreen(0x22)
+    internal_fillScreen(0x33)
     
 def internal_fillScreen(color):
     data = bytearray(8192)
