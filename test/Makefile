@@ -5,13 +5,13 @@ CFG ?= ../cfg/durango16k.cfg
 DCLIB ?= ../bin
 DCINC ?= ../inc
 
-all: $(BUILD_DIR)/test_sprites.dux $(BUILD_DIR)/test_qgraph.dux
+all: $(BUILD_DIR)/test_ok
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
-$(BUILD_DIR)/pad.bin: $(BUILD_DIR)
-	dd if=/dev/zero of=$(BUILD_DIR)/pad.bin bs=1K count=16
+$(BUILD_DIR)/test_ok: $(BUILD_DIR)/test_sprites.dux $(BUILD_DIR)/test_qgraph.dux
+	pytest
 
 
 
