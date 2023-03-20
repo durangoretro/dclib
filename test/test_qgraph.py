@@ -1,10 +1,5 @@
-import os
-
+import durango_testing
 
 def test_fillScreen():
-    os.system('../../minimOS/emulation/perdita -gl bin/test_qgraph.dut')
-    with open('./dump.bin', 'rb') as f:
-        dump =bytearray(f.read())
-    os.remove('./dump.bin')
-    
+    dump = durango_testing.run_durango('test_qgraph')
     assert dump[0x6000] == 0x11

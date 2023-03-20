@@ -3,3 +3,4 @@ bin/
 *.bin
 inc/font.h
 __pycache__
+*.pyc
