@@ -1,7 +1,7 @@
 import os
 
 
-def run_durango(rom_name):
+def run_durango(rom_name, test_data):
     test_image = bytearray(65543)
     # Add rom
     with open('./bin/'+rom_name+'.dux', 'rb') as fr:
@@ -10,6 +10,12 @@ def run_durango(rom_name):
             raise Exception("Wrong rom size")
         for i in range(16*1024):
             test_image[0xC000+i]=rom[i]
+    
+    # Add input data
+    if len(test_data)!=8*1024:
+        raise Exception("Wrong test data size")
+    for i in range(8*1024):
+        test_image[0x4000+i]=test_data[i]
     
     # Add register A
     test_image[65536] = 0x00;
