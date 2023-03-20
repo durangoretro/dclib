@@ -15,7 +15,7 @@ def run_durango(rom_name, test_data):
     if len(test_data)!=8*1024:
         raise Exception("Wrong test data size")
     for i in range(8*1024):
-        test_image[0x4000+i]=test_data[i]
+        test_image[0x8000+i]=test_data[i]
     
     # Add register A
     test_image[65536] = 0x00;
@@ -38,5 +38,5 @@ def run_durango(rom_name, test_data):
     os.system('../../minimOS/emulation/perdita -gl bin/'+rom_name+'.dutt')
     with open('./dump.bin', 'rb') as f:
         dump =bytearray(f.read())
-    os.remove('./dump.bin')
+    #os.remove('./dump.bin')
     return dump
