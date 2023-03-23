@@ -12,5 +12,4 @@ int main() {
     
     consoleLogHex(test_data[0]);
     
-    psvDump();
 }
