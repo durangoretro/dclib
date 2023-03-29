@@ -11,7 +11,7 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 $(BUILD_DIR)/test_ok: $(BUILD_DIR)/test_sprites.dux $(BUILD_DIR)/test_qgraph.dux
-	pytest
+	pytest -s
 
 
 
