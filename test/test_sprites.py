@@ -1,9 +1,9 @@
 import durango_testing
 
 def test_answer():
-    internal_cols(0,0,50,50)
+    internal_cols(0,0,50,50, 0)
 
-def internal_cols(x1, y1, x2, y2):
+def internal_cols(x1, y1, x2, y2, expected):
     data = bytearray(8192)
     data[0]=x1
     data[1]=y1
@@ -16,4 +16,4 @@ def internal_cols(x1, y1, x2, y2):
     
     dump = durango_testing.run_durango('test_sprites', data)
 
-    assert dump[0x6000] == 0x00
+    assert dump[0x6000] == expected

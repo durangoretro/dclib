@@ -2,11 +2,14 @@
 #include <psv.h>
 
 char* test_data;
+char* out_data;
 sprite a, b;
+char collision;
 
 int main() {
-
+    
     test_data = 0x8000;
+    out_data = 0x6000;
     
     a.x=test_data[0];
     a.y=test_data[1];
@@ -28,5 +31,8 @@ int main() {
     consoleLogHex(b.y);
     consoleLogHex(b.width);
     consoleLogHex(b.height);
+    
+    collision = check_collisions(&a, &b);
+    out_data[0]=collision;
     
 }
