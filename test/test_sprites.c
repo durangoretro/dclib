@@ -22,17 +22,18 @@ int main() {
     b.width=test_data[7];
     
     consoleLogStr("Hello world!\n");
-    consoleLogHex(a.x);
-    consoleLogHex(a.y);
-    consoleLogHex(a.width);
-    consoleLogHex(a.height);
+    consoleLogDecimal(a.x);
+    consoleLogDecimal(a.y);
+    consoleLogDecimal(a.width);
+    consoleLogDecimal(a.height);
     
-    consoleLogHex(b.x);
-    consoleLogHex(b.y);
-    consoleLogHex(b.width);
-    consoleLogHex(b.height);
+    consoleLogDecimal(b.x);
+    consoleLogDecimal(b.y);
+    consoleLogDecimal(b.width);
+    consoleLogDecimal(b.height);
     
     collision = check_collisions(&a, &b);
+    consoleLogDecimal(collision);
     out_data[0]=collision;
     
 }
