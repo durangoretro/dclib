@@ -19,6 +19,7 @@ extern void __fastcall__ getBuildVersion(long*);
 extern void __fastcall__ getDCLIBVersion(char*);
 extern void __fastcall__ random_init(int);
 extern int __fastcall__ random(void);
+extern int __fastcall__ clear_screen(void);
 
 // Gamepad keys
 #define BUTTON_A 0x80
