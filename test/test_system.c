@@ -36,15 +36,15 @@ void test_random() {
     consoleLogStr("\nSeed: ");
     consoleLogInt(seed);
     
-    iterations = test_data[3] || test_data[4]<<8;
+    iterations = read_int(3);
     consoleLogStr("\nGenerating random number. Count: ");
     consoleLogInt(iterations);
     
     i=0;
     do {
         random_value = random();
-        consoleLogStr("\nRandom value: ");
-        consoleLogDecimal(random_value);
+        //consoleLogStr("\nRandom value: ");
+        //consoleLogDecimal(random_value);
         out_data[random_value]++;
         i++;     
     } while(i!=iterations);
