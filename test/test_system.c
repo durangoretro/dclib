@@ -1,5 +1,6 @@
 #include <system.h>
 #include <psv.h>
+#include "durango_testing.h"
 
 char* test_data;
 char* out_data;
@@ -31,7 +32,7 @@ void test_random() {
     setHiRes(1);
     clear_screen();
     
-    seed = test_data[1] || test_data[2]<<8;
+    seed = read_int(1);
     consoleLogStr("\nSeed: ");
     consoleLogInt(seed);
     
