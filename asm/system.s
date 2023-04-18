@@ -404,7 +404,7 @@
     LDA RANDOM_SEED
     EOR #$2D
     STA RANDOM_SEED
-    BRA end
+    RTS
     lo_z:
     LDA RANDOM_SEED+1
     BEQ do_eor2
@@ -413,11 +413,6 @@
     BCS do_eor
     no_eor:
     STA RANDOM_SEED+1
-    BRA end
-    
-    end:
-    LDA RANDOM_SEED
-    LDX RANDOM_SEED+1
     RTS
 .endproc
 

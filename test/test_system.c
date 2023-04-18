@@ -34,7 +34,7 @@ void test_random() {
     
     seed = read_int(1);
     consoleLogStr("\nSeed: ");
-    consoleLogInt(seed);
+    consoleLogHex16(seed);
     
     iterations = read_int(3);
     consoleLogStr("\nGenerating random number. Count: ");
