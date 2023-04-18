@@ -342,7 +342,7 @@ hw_nmi_int:
 .byt "################################"
 .byt "SIGNATURE:[##]$$"
 .byt "DCLIB:[########]"
-.byt "BUILD:[####]$$$$"
+.byt "BUILD:[########]"
 .byt "######DmOS######"
 .byt "#"
 ; Dev-Cart JMP at $FFE1
