@@ -23,6 +23,7 @@
 .export _getDCLIBVersion
 .export _random_init
 .export _random
+.export _clear_screen
 
 .proc _setHiRes: near
 	CMP #0
@@ -403,7 +404,7 @@
     LDA RANDOM_SEED
     EOR #$2D
     STA RANDOM_SEED
-    BRA end
+    RTS
     lo_z:
     LDA RANDOM_SEED+1
     BEQ do_eor2
@@ -412,10 +413,21 @@
     BCS do_eor
     no_eor:
     STA RANDOM_SEED+1
-    BRA end
-    
-    end:
-    LDA RANDOM_SEED
-    LDX RANDOM_SEED+1
+    RTS
+.endproc
+
+.proc _clear_screen: near
+    ; Init video pointer
+    LDX #$60
+    STX VMEM_POINTER+1
+    LDY #$00
+    STY VMEM_POINTER
+    LDA #0
+    loop:
+    STA (VMEM_POINTER), Y
+    INY
+    BNE loop
+	INC VMEM_POINTER+1
+    BPL loop
     RTS
 .endproc
