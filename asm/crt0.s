@@ -338,12 +338,13 @@ hw_nmi_int:
 ; SEGMENT METADATA
 ; ---------------------------------------------------------------------------
 .segment "METADATA"
-.byt "TITLE:[                        ]"
-.byt "AUTHOR:[                       ]"
-.byt "DATE[##/##/####]"
+.byt "################################"
+.byt "################################"
+.byt "SIGNATURE:[##]$$"
 .byt "DCLIB:[########]"
 .byt "BUILD:[####]$$$$"
-.byt "SIGNATURE:[##]$$"
+.byt "######DmOS######"
 .byt "#"
+; Dev-Cart JMP at $FFE1
 JMP($FFFC)
 .byt "############"
