@@ -20,7 +20,6 @@
 .export _subBCD
 .export _render_image
 .export _getBuildVersion
-.export _getDCLIBVersion
 .export _random_init
 .export _random
 .export _clear_screen
@@ -340,42 +339,16 @@
     STX DATA_POINTER+1
     
     ; Read build version
-    LDY #0
-    LDA STAMP+3
-    STA (DATA_POINTER),Y
-    
-    INY
-    LDA STAMP+2    
-    STA (DATA_POINTER),Y
-    
-    INY
-    LDA STAMP+1
-    STA (DATA_POINTER),Y
-    
-    INY
-    LDA STAMP 
-    STA (DATA_POINTER),Y
-    
-    
-    RTS
-.endproc
-
-.proc _getDCLIBVersion: near
-    ; Read pointer location
-    STA DATA_POINTER
-    STX DATA_POINTER+1
-    
-    ; Read build version
-    LDX #7
-    LDY #7
+    LDX #15
+    LDY #15
     loop:
-    LDA DCLIB_VERSION,X
+    LDA BUILD_HASH,X
     STA (DATA_POINTER),Y
-    DEx
-    DEy
+    DEX
+    DEY
     BPL loop
     
-    LDY #8
+    LDY #16
     LDA #0
     STA (DATA_POINTER),Y
     

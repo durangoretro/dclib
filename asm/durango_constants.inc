@@ -27,8 +27,7 @@ IRQ_ADDR = $0200
 NMI_ADDR = $0202
 KEY_PRESSED = $020A
 SIGNATURE = $FFAB
-DCLIB_VERSION = $FFB7
-STAMP = $FFC7
+BUILD_HASH = $C0E6
 
 ; ---------------------------------------------------------------------------
 ; DURANGO LIB PAGE ZERO CONSTANTS

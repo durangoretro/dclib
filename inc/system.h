@@ -15,8 +15,7 @@ extern unsigned char __fastcall__ get_bit(unsigned char value, unsigned char num
 extern void __cdecl__ addBCD(long*, long*);
 extern void __cdecl__ subBCD(long*, long*);
 extern void __fastcall__ render_image(void*);
-extern void __fastcall__ getBuildVersion(long*);
-extern void __fastcall__ getDCLIBVersion(char*);
+extern void __fastcall__ getBuildVersion(char*);
 extern void __fastcall__ random_init(int);
 extern unsigned char __fastcall__ random(void);
 extern void __fastcall__ clear_screen(void);
