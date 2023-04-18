@@ -46,7 +46,7 @@ _init:
 sum		= $00			; included as output parameters
 chk		= $01				; sum of sums
 sysptr  = $02
-reset = _init
+reset   = $C000
 
 ; *** compute checksum *** initial setup is 12b, 16t
 	LDX #>reset				; start page as per interface (MUST be page-aligned!)
