@@ -30,7 +30,7 @@ SIGNATURE = $FFAB
 BUILD_HASH = $C0E6
 
 ; ---------------------------------------------------------------------------
-; DURANGO LIB PAGE ZERO CONSTANTS
+; DURANGO LIB PAGE ZERO CONSTANTS ($00-$2F)
 ; ---------------------------------------------------------------------------
 VMEM_POINTER = $10 ; $11
 DATA_POINTER = $12 ; $13

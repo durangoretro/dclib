@@ -2,9 +2,14 @@ import durango_testing
 
 def test_answer():
     # 2 right to 1
-    internal_cols(0,0,50,50, 0)
+    internal_cols(0,0,50,0, 0)
     # 2 above 1
     internal_cols(50,50,50,10, 0)
+    # 2 left to 1
+    internal_cols(50,0,0,0, 0)
+    # 2 right overlap to 1
+    internal_cols(0,0,5,0, 1)
+    
 
 def internal_cols(x1, y1, x2, y2, expected):
     data = bytearray(8192)
