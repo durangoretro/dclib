@@ -39,19 +39,31 @@ Y_COORD = $15
 HEIGHT = $16
 WIDTH = $17
 RESOURCE_POINTER = $18 ; $19
+X2_COORD = $1A
+Y2_COORD = $1B
+X3_COORD = $1C
+Y3_COORD = $1D
+X4_COORD = $1E
+Y4_COORD = $1F
 COLOUR = $20
 PAPER = $21
-BACKGROUND_POINTER = $22; $22; $23
+BACKGROUND_POINTER = $22; $23
 TEMP1 = $24
 TEMP2 = $25
 TEMP3 = $26
 TEMP4 = $27
 RANDOM_SEED = $28; 29
+TEMP5 = $2A
+TEMP6 = $2B
+TEMP7 = $2C
+TEMP8 = $2D
+HEIGHT2 = $2E
+WIDTH2 = $2F
 
 ; ---------------------------------------------------------------------------
-; DURANGO LIB MEMORY CONSTANTS
+; DURANGO LIB MEMORY CONSTANTS ($0200-$02FF)
 ; ---------------------------------------------------------------------------
-TEMP10 = $020A
+TEMP11 = $020A
 
 ; ---------------------------------------------------------------------------
 ; VIRTUAL SERIAL PORT CONSTANTS
