@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sh '''
 			make clean all RESCOMP=../fun_rescomp/target/rescomp.jar
-            cd test && make clean all RESCOMP=../../fun_rescomp/target/rescomp.jar
+            cd test && make clean all RESCOMP=../../fun_rescomp/target/rescomp.jar PERDITA=../../fun_perdita/emulation/perdita
                 '''
             }
         }

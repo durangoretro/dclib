@@ -23,7 +23,7 @@ def run_durango(rom_name, test_data):
         ft.write(test_image)
     
     # Run testing image on Perdita
-    os.system('../../minimOS/emulation/perdita -hfd bin/'+rom_name+'.dutt')
+    os.system('$PERDITA -hfd bin/'+rom_name+'.dutt')
     # Get dump
     with open('./dump.bin', 'rb') as f:
         dump =bytearray(f.read())

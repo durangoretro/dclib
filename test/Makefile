@@ -4,6 +4,7 @@ BUILD_DIR ?= bin
 CFG ?= ../cfg/durango16k.cfg
 DCLIB ?= ../bin
 DCINC ?= ../inc
+PERDITA ?= ../../minimOS/emulation/perdita
 
 all: $(BUILD_DIR)/test_ok
 
@@ -11,7 +12,7 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 $(BUILD_DIR)/test_ok: $(BUILD_DIR)/test_sprites.dux $(BUILD_DIR)/test_qgraph.dux $(BUILD_DIR)/test_system.dux
-	pytest -s
+	export PERDITA=$(PERDITA) && pytest -s
 
 $(BUILD_DIR)/durango_testing.o: $(SOURCE_DIR)/durango_testing.asm
 	ca65 -t none $(SOURCE_DIR)/durango_testing.asm -o $(BUILD_DIR)/durango_testing.o
