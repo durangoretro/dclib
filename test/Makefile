@@ -24,7 +24,7 @@ $(BUILD_DIR)/test_qgraph.o: $(BUILD_DIR)/test_qgraph.casm
 $(BUILD_DIR)/test_qgraph.bin: $(BUILD_DIR)/test_qgraph.o
 	ld65 -C $(CFG) $(BUILD_DIR)/test_qgraph.o $(DCLIB)/qgraph.lib $(DCLIB)/durango.lib $(DCLIB)/psv.lib -o $(BUILD_DIR)/test_qgraph.bin	
 $(BUILD_DIR)/test_qgraph.dux: $(BUILD_DIR)/test_qgraph.bin
-	java -jar ${RESCOMP} -m SIGNER -n $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -i $(BUILD_DIR)/test_qgraph.bin -o $(BUILD_DIR)/test_qgraph.dux
+	java -jar ${RESCOMP} -m SIGNER -n $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -t QGRAPH-TEST -d "Test qgraph lib" -i $(BUILD_DIR)/test_qgraph.bin -o $(BUILD_DIR)/test_qgraph.dux
 
 
 $(BUILD_DIR)/test_sprites.casm: $(BUILD_DIR) $(SOURCE_DIR)/test_sprites.c
@@ -34,7 +34,7 @@ $(BUILD_DIR)/test_sprites.o: $(BUILD_DIR)/test_sprites.casm
 $(BUILD_DIR)/test_sprites.bin: $(BUILD_DIR)/test_sprites.o
 	ld65 -C $(CFG) $(BUILD_DIR)/test_sprites.o $(DCLIB)/sprites.lib $(DCLIB)/durango.lib $(DCLIB)/psv.lib -o $(BUILD_DIR)/test_sprites.bin	
 $(BUILD_DIR)/test_sprites.dux: $(BUILD_DIR)/test_sprites.bin
-	java -jar ${RESCOMP} -m SIGNER -n $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -i $(BUILD_DIR)/test_sprites.bin -o $(BUILD_DIR)/test_sprites.dux
+	java -jar ${RESCOMP} -m SIGNER -n $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -t SPRITES-TEST -d "Test sprites lib" -i $(BUILD_DIR)/test_sprites.bin -o $(BUILD_DIR)/test_sprites.dux
 	
 
 $(BUILD_DIR)/test_system.casm: $(BUILD_DIR) $(SOURCE_DIR)/test_system.c
@@ -44,7 +44,7 @@ $(BUILD_DIR)/test_system.o: $(BUILD_DIR)/test_system.casm
 $(BUILD_DIR)/test_system.bin: $(BUILD_DIR)/test_system.o $(BUILD_DIR)/durango_testing.o
 	ld65 -C $(CFG) $(BUILD_DIR)/test_system.o $(DCLIB)/system.lib $(DCLIB)/durango.lib $(DCLIB)/psv.lib $(BUILD_DIR)/durango_testing.o -o $(BUILD_DIR)/test_system.bin	
 $(BUILD_DIR)/test_system.dux: $(BUILD_DIR)/test_system.bin
-	java -jar ${RESCOMP} -m SIGNER -n $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -i $(BUILD_DIR)/test_system.bin -o $(BUILD_DIR)/test_system.dux	
+	java -jar ${RESCOMP} -m SIGNER -n $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -t SYSTEM-TEST -d "Test system lib" -i $(BUILD_DIR)/test_system.bin -o $(BUILD_DIR)/test_system.dux	
 	
 
 
