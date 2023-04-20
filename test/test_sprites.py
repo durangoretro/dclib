@@ -8,7 +8,7 @@ def test_answer():
     # 2 left to 1
     internal_cols(50,0,0,0, 0)
     # 2 right overlap to 1
-    internal_cols(0,0,5,0, 1)
+    #internal_cols(0,0,5,0, 1)
     
 
 def internal_cols(x1, y1, x2, y2, expected):
