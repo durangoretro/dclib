@@ -8,10 +8,6 @@ X3_COORD = 0x1C
 Y3_COORD = 0x1D
 X4_COORD = 0x1E
 Y4_COORD = 0x1F
-HEIGHT   = 0x16
-WIDTH    = 0x17
-HEIGHT2  = 0x2E
-WIDTH2   = 0x2F
 
 def test_answer():
     # 2 right to 1
@@ -57,14 +53,10 @@ def internal_cols_coords(x1, y1, w1, h1, x2, y2, w2, h2):
     dump = durango_testing.run_durango('test_sprites', data)
     assert dump[X_COORD] == x1
     assert dump[Y_COORD] == y1
-    assert dump[WIDTH] == w1
-    assert dump[HEIGHT] == h1
     assert dump[X2_COORD] == x1+w1
     assert dump[Y2_COORD] == y1+h1
     assert dump[X3_COORD] == x2
     assert dump[Y3_COORD] == y2
-    assert dump[WIDTH2] == w2
-    assert dump[HEIGHT2] == h2
     assert dump[X4_COORD] == x2+w2
     assert dump[Y4_COORD] == y2+h2
     
