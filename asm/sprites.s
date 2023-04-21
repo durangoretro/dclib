@@ -632,6 +632,16 @@
     INY
     LDA (DATA_POINTER), Y
     STA HEIGHT
+    ; Calculate X2
+    CLC
+    LDA X_COORD
+    ADC WIDTH
+    STA X2_COORD
+    ; Calculate Y2
+    CLC
+    LDA Y_COORD
+    ADC HEIGHT
+    STA Y2_COORD
     
     ; Load X2
 	LDY #0
