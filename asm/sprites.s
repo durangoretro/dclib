@@ -608,9 +608,30 @@
     LDA (sp), Y
     STA RESOURCE_POINTER
     
+    JSR calculate_cols_coords
+    
     JSR incsp4
     LDA #0
     RTS
+.endproc
+
+.proc calculate_cols_coords: near
+    ; Load X
+	LDY #0
+	LDA (DATA_POINTER), Y
+    STA X_COORD
+    ; Load Y
+    INY
+    LDA (DATA_POINTER), Y
+    STA X_COORD
+    ; Load width
+    LDY #4
+    LDA (DATA_POINTER), Y
+    STA WIDTH
+    ; Load height
+    INY
+    LDA (DATA_POINTER), Y
+    STA HEIGHT
 .endproc
 
 

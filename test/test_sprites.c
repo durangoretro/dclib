@@ -21,19 +21,23 @@ int main() {
     b.width=test_data[6];
     b.height=test_data[7];
     
-    consoleLogStr("Hello world!\n");
+    consoleLogStr("SPRITES TEST\n");
+    consoleLogStr("============\n");
+    consoleLogStr("First sprite: x,y,w,h\n");
     consoleLogDecimal(a.x);
     consoleLogDecimal(a.y);
     consoleLogDecimal(a.width);
     consoleLogDecimal(a.height);
-    
+    consoleLogStr("\nSecond sprite: x,y,w,h\n");
     consoleLogDecimal(b.x);
     consoleLogDecimal(b.y);
     consoleLogDecimal(b.width);
     consoleLogDecimal(b.height);
+    consoleLogStr("\n");
     
     collision = check_collisions(&a, &b);
+    consoleLogStr("\nCollision: ");
     consoleLogDecimal(collision);
-    out_data[0]=collision;
-    
+    consoleLogStr("\n");
+    out_data[0]=collision;    
 }
