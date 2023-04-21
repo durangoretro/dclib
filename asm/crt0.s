@@ -32,8 +32,11 @@
 
 ; Initialize Durango X
 _init:
-    ; Disable interrupts
-    SEI
+    ; Initialize 6502    
+    SEI ; Disable interrupts
+    CLD ; Clear decimal mode
+    LDX #$FF ; Initialize stack pointer to $01FF
+    TXS
     
     ; Clean video mode
     LDA #$30
@@ -117,13 +120,6 @@ reset   = $C000
     BNE loopcm
 	INC $01
     BPL loopcm
-
-    ; Initialize stack pointer to $01FF
-    LDX #$FF
-    TXS
-
-    ; Clear decimal mode
-    CLD
    
     ; Initialize cc65 stack pointer
     LDA #<(__STACKSTART__ + __STACKSIZE__)
