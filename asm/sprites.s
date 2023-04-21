@@ -609,6 +609,7 @@
     STA RESOURCE_POINTER
     
     JSR calculate_cols_coords
+    JSR check_cols_coords
     
     JSR incsp4
     LDA #0
@@ -669,6 +670,16 @@
     LDA Y3_COORD
     ADC HEIGHT2
     STA Y4_COORD
+    
+    RTS
+.endproc
+
+.proc check_cols_coords: near
+    
+    
+    
+    LDA #1
+    RTS
 .endproc
 
 
