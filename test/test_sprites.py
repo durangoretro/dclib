@@ -60,8 +60,10 @@ def internal_cols_coords(x1, y1, w1, h1, x2, y2, w2, h2):
     assert dump[HEIGHT] == h1
     #assert dump[X2_COORD] == x1+w1
     #assert dump[Y2_COORD] == y1+h1
-    #assert dump[X3_COORD] == x2
-    #assert dump[Y3_COORD] == y2
+    assert dump[X3_COORD] == x2
+    assert dump[Y3_COORD] == y2
+    assert dump[WIDTH2] == w2
+    assert dump[HEIGHT2] == h2
     #assert dump[X4_COORD] == x2+w2
     #assert dump[Y4_COORD] == y2+h2
     

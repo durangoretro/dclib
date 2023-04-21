@@ -616,22 +616,39 @@
 .endproc
 
 .proc calculate_cols_coords: near
-    ; Load X
+    ; Load X1
 	LDY #0
 	LDA (DATA_POINTER), Y
     STA X_COORD
-    ; Load Y
+    ; Load Y1
     INY
     LDA (DATA_POINTER), Y
-    STA X_COORD
-    ; Load width
+    STA Y_COORD
+    ; Load width1
     LDY #4
     LDA (DATA_POINTER), Y
     STA WIDTH
-    ; Load height
+    ; Load height1
     INY
     LDA (DATA_POINTER), Y
     STA HEIGHT
+    
+    ; Load X2
+	LDY #0
+	LDA (RESOURCE_POINTER), Y
+    STA X3_COORD
+    ; Load Y2
+    INY
+    LDA (RESOURCE_POINTER), Y
+    STA Y3_COORD
+    ; Load width2
+    LDY #4
+    LDA (RESOURCE_POINTER), Y
+    STA WIDTH2
+    ; Load height2
+    INY
+    LDA (RESOURCE_POINTER), Y
+    STA HEIGHT2
 .endproc
 
 
