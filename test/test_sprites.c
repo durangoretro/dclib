@@ -13,13 +13,13 @@ int main() {
     
     a.x=test_data[0];
     a.y=test_data[1];
-    a.height=test_data[2];
-    a.width=test_data[3];
+    a.width=test_data[2];
+    a.height=test_data[3];
     
     b.x=test_data[4];
     b.y=test_data[5];
-    b.height=test_data[6];
-    b.width=test_data[7];
+    b.width=test_data[6];
+    b.height=test_data[7];
     
     consoleLogStr("Hello world!\n");
     consoleLogDecimal(a.x);
