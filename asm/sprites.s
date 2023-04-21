@@ -659,6 +659,16 @@
     INY
     LDA (RESOURCE_POINTER), Y
     STA HEIGHT2
+    ; Calculate X4
+    CLC
+    LDA X3_COORD
+    ADC WIDTH2
+    STA X4_COORD
+    ; Calculate Y4
+    CLC
+    LDA Y3_COORD
+    ADC HEIGHT2
+    STA Y4_COORD
 .endproc
 
 
