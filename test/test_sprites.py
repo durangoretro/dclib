@@ -12,12 +12,16 @@ Y4_COORD = 0x1F
 def test_answer():
     # 2 right to 1
     internal_cols(0,0,50,0, 0)
+    # 1 right to 2    
+    internal_cols(50,0,0,0, 0)
     # 2 above 1
     #internal_cols(50,50,50,10, 0)
     # 2 left to 1
     #internal_cols(50,0,0,0, 0)
     # 2 right overlap to 1
     internal_cols(0,0,5,0, 1)
+    # 1 right overlap to 2
+    internal_cols(5,0,0,0, 1)
 
 def test_cols_coords():
     internal_cols_coords(0,0,10,10,  5,5,15,20)

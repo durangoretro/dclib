@@ -681,6 +681,11 @@
     CPX X3_COORD
     BCC no_coll
     
+    ; A right to B X4<X1
+    LDX X4_COORD
+    CPX X_COORD
+    BCC no_coll
+    
     
 
     LDA #1
