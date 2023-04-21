@@ -24,7 +24,8 @@ def test_answer():
     #internal_cols(0,0,5,0, 1)
 
 def test_cols_coords():
-    internal_cols_coords(0,0,10,10,5,5,15,20)
+    internal_cols_coords(0,0,10,10,  5,5,15,20)
+    internal_cols_coords(1,3,7,7,    5,65,31,23)
     
 
 def internal_cols(x1, y1, x2, y2, expected):
