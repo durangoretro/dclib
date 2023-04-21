@@ -15,9 +15,9 @@ def test_answer():
     # 1 right to 2    
     internal_cols(50,0,0,0, 0)
     # 2 above 1
-    #internal_cols(50,50,50,10, 0)
-    # 2 left to 1
-    #internal_cols(50,0,0,0, 0)
+    internal_cols(50,50,50,10, 0)
+    # 1 above 2
+    internal_cols(50,10,50,50, 0)
     # 2 right overlap to 1
     internal_cols(0,0,5,0, 1)
     # 1 right overlap to 2
@@ -26,6 +26,7 @@ def test_answer():
 def test_cols_coords():
     internal_cols_coords(0,0,10,10,  5,5,15,20)
     internal_cols_coords(1,3,7,7,    5,65,31,23)
+    internal_cols_coords(50,10,10,10,    50,50,10,10)
     
 
 def internal_cols(x1, y1, x2, y2, expected):

@@ -686,6 +686,15 @@
     CPX X_COORD
     BCC no_coll
     
+    ; A above B Y2<Y3
+    LDX Y2_COORD
+    CPX Y3_COORD
+    BCC no_coll
+    
+    ; B above A Y4<Y1
+    LDX Y4_COORD
+    CPX Y_COORD
+    BCC no_coll
     
 
     LDA #1
