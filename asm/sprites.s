@@ -610,9 +610,10 @@
     
     JSR calculate_cols_coords
     JSR check_cols_coords
+    PHA
     
     JSR incsp4
-    LDA #0
+    PLA
     RTS
 .endproc
 
@@ -675,10 +676,17 @@
 .endproc
 
 .proc check_cols_coords: near
+    ; B right to A X2<X3
+    LDX X2_COORD
+    CPX X3_COORD
+    BCC no_coll
     
     
-    
+
     LDA #1
+    RTS
+    no_coll:
+    LDA #0
     RTS
 .endproc
 
