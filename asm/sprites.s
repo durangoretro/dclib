@@ -99,11 +99,8 @@
 	RTS
 .endproc
 
-.proc render_sprite: near
-    loop2:
-    LDY WIDTH
-    DEY
-    loop:
+.proc render_sprite_row: near
+    ; Column in Y
     LDA (RESOURCE_POINTER),Y
     TAX
     ; Check if transparency
@@ -126,6 +123,15 @@
     STA (VMEM_POINTER),Y
     ; end else
     end_transp:
+    RTS
+.endproc
+
+.proc render_sprite: near
+    loop2:
+    LDY WIDTH
+    DEY
+    loop:
+    JSR render_sprite_row
     DEY
     BPL loop
     CLC
