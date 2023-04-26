@@ -100,6 +100,8 @@
 .endproc
 
 .proc render_sprite_pixel_pair: near
+    LDA X2_COORD
+    BMI end_transp
     ; Column in Y
     LDA (RESOURCE_POINTER),Y
     TAX
@@ -130,8 +132,14 @@
     loop2:
     LDY WIDTH
     DEY
+    TYA
+    ASL
+    ADC X_COORD
+    STA X2_COORD
     loop:
     JSR render_sprite_pixel_pair
+    DEC X2_COORD
+    DEC X2_COORD
     DEY
     BPL loop
     RTS

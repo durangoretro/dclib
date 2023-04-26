@@ -71,7 +71,6 @@
 	STY VSP_CONFIG
     ; Send value to virtual serial port
     STA VSP
-    STX VSP
     RTS
 .endproc
 
