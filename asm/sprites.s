@@ -162,7 +162,7 @@
     STA Y_COORD
     
     ; Video pointer
-    LDY #2
+    INY
     LDA (DATA_POINTER),Y
     STA VMEM_POINTER
     STA BACKGROUND_POINTER
