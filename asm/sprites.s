@@ -3,6 +3,7 @@
 
 .importzp sp
 .import incsp4
+.import coords2mem
 
 .export _load_background
 .export _clrscr
@@ -214,6 +215,24 @@
     INA
     INA
     STA (DATA_POINTER)
+    BNE nonzero
+    
+    ; Recalculate vmem position on zero
+    STA X_COORD
+    ; y coord
+    LDY #1
+    LDA (DATA_POINTER),Y
+    STA Y_COORD
+    JSR coords2mem
+    LDY #2
+    LDA VMEM_POINTER
+    STA (DATA_POINTER),Y
+    INY
+    LDA VMEM_POINTER+1
+    STA (DATA_POINTER),Y
+    BRA skip3
+    nonzero:
+    
     ; Update vmem position
     LDY #2
     LDA (DATA_POINTER),Y

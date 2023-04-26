@@ -7,6 +7,7 @@ extern void __fastcall__ consoleLogWord(unsigned short value);
 extern void __fastcall__ consoleLogBinary(unsigned char value);
 extern void __fastcall__ consoleLogDecimal(unsigned char value);
 extern void __fastcall__ consoleLogInt(int value);
+extern void __fastcall__ consoleLogSignedChar(char value);
 extern void __fastcall__ consoleLogHex16(int value);
 extern void __fastcall__ consoleLogChar(unsigned char);
 extern void __fastcall__ consoleLogStr(char *str);
