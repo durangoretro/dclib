@@ -99,7 +99,7 @@
 	RTS
 .endproc
 
-.proc render_sprite_row: near
+.proc render_sprite_pixel_pair: near
     ; Column in Y
     LDA (RESOURCE_POINTER),Y
     TAX
@@ -126,14 +126,20 @@
     RTS
 .endproc
 
-.proc render_sprite: near
+.proc render_sprite_row: near
     loop2:
     LDY WIDTH
     DEY
     loop:
-    JSR render_sprite_row
+    JSR render_sprite_pixel_pair
     DEY
     BPL loop
+    RTS
+.endproc
+
+.proc render_sprite: near
+    loop2:
+    JSR render_sprite_row
     CLC
     LDA VMEM_POINTER
     ADC #$40
