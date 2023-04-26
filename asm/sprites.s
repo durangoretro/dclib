@@ -154,6 +154,13 @@
     STA DATA_POINTER
     STX DATA_POINTER+1
     
+    LDY #0
+    LDA (DATA_POINTER),Y
+    STA X_COORD
+    INY
+    LDA (DATA_POINTER),Y
+    STA Y_COORD
+    
     ; Video pointer
     LDY #2
     LDA (DATA_POINTER),Y
