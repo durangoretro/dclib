@@ -217,19 +217,18 @@
     LDA (DATA_POINTER),Y
     STA HEIGHT
     
-    ; Update x coord
+    ; Update x,y coord
+    LDY #1
+    LDA (DATA_POINTER),Y
+    STA Y_COORD
     LDA (DATA_POINTER)
     INA
     INA
     STA (DATA_POINTER)
+    STA X_COORD
     BNE nonzero
     
     ; Recalculate vmem position on zero
-    STA X_COORD
-    ; y coord
-    LDY #1
-    LDA (DATA_POINTER),Y
-    STA Y_COORD
     JSR coords2mem
     LDY #2
     LDA VMEM_POINTER
@@ -340,19 +339,18 @@
     DEX
     BPL loop
 
-    ; Update x coord
+    ; Update x,y coord
+    LDY #1
+    LDA (DATA_POINTER),Y
+    STA Y_COORD
     LDA (DATA_POINTER)
     DEA
     DEA
     STA (DATA_POINTER)
+    STA X_COORD
     BNE nonzero
     
     ; Recalculate vmem position on zero
-    STA X_COORD
-    ; y coord
-    LDY #1
-    LDA (DATA_POINTER),Y
-    STA Y_COORD
     JSR coords2mem
     LDY #2
     LDA VMEM_POINTER
