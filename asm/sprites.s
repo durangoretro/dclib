@@ -182,13 +182,14 @@
     STA Y_COORD
     
     ; Video pointer
-    INY
-    LDA (DATA_POINTER),Y
-    STA VMEM_POINTER
+    JSR coords2mem
+    LDY #2
+    LDA VMEM_POINTER
+    STA (DATA_POINTER),Y
     STA BACKGROUND_POINTER
     INY
-    LDA (DATA_POINTER),Y
-    STA VMEM_POINTER+1
+    LDA VMEM_POINTER+1
+    STA (DATA_POINTER),Y    
     AND #$df
     STA BACKGROUND_POINTER+1
     
