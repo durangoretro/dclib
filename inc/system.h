@@ -48,6 +48,7 @@ extern void __fastcall__ clear_screen(void);
 #define WHITE 0xff
 
 // Keyboard
+// 0
 #define KEY_SPACE 0X80
 #define KEY_INTRO 0X40
 #define KEY_SHIFT 0X20
@@ -56,6 +57,50 @@ extern void __fastcall__ clear_screen(void);
 #define KEY_A 0X04
 #define KEY_Q 0X02
 #define KEY_1 0X01
+#define KEY_ESC 0X01
+// 1
+#define KEY_ALT 0X80
+#define KEY_L 0X40
+#define KEY_Z 0X20
+#define KEY_O 0X10
+#define KEY_9 0X08
+#define KEY_S 0X04
+#define KEY_W 0X02
+#define KEY_2 0X01
+#define KEY_TAB 0X01
+// 2
+#define KEY_M 0X80
+#define KEY_K 0X40
+#define KEY_X 0X20
+#define KEY_I 0X10
+#define KEY_8 0X08
+#define KEY_ARROW_RIGHT 0X08
+#define KEY_D 0X04
+#define KEY_E 0X02
+#define KEY_3 0X01
+#define KEY_NORM 0X01
+// 3
+#define KEY_N 0X80
+#define KEY_J 0X40
+#define KEY_C 0X20
+#define KEY_U 0X10
+#define KEY_7 0X08
+#define KEY_ARROW_UP 0X08
+#define KEY_F 0X04
+#define KEY_R 0X02
+#define KEY_4 0X01
+#define KEY_INV 0X01
+// 4
+#define KEY_B 0X80
+#define KEY_H 0X40
+#define KEY_V 0X20
+#define KEY_Y 0X10
+#define KEY_6 0X08
+#define KEY_ARROW_DOWN 0X08
+#define KEY_G 0X04
+#define KEY_T 0X02
+#define KEY_5 0X01
+#define KEY_ARROW_LEFT 0X01
 
 
 

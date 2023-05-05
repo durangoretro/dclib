@@ -60,6 +60,7 @@
     BMI exit_loop
     BVS exit_loop
     LDA KEYBOARD_CACHE
+    AND #$40
     BNE exit_loop
     BRA loop
     exit_loop:
