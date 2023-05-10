@@ -49,59 +49,114 @@ extern void __fastcall__ clear_screen(void);
 
 // Keyboard
 // 0
-#define KEY_SPACE 0X80
-#define KEY_INTRO 0X40
-#define KEY_SHIFT 0X20
-#define KEY_P 0X10
-#define KEY_0 0X08
-#define KEY_A 0X04
-#define KEY_Q 0X02
-#define KEY_1 0X01
-#define KEY_ESC 0X01
+#define KEY_SPACE 0x80
+#define KEY_INTRO 0x40
+#define KEY_SHIFT 0x20
+#define KEY_P 0x10
+#define KEY_0 0x08
+#define KEY_A 0x04
+#define KEY_Q 0x02
+#define KEY_1 0x01
+#define KEY_ESC 0x01
 // 1
-#define KEY_ALT 0X80
-#define KEY_L 0X40
-#define KEY_Z 0X20
-#define KEY_O 0X10
-#define KEY_9 0X08
-#define KEY_S 0X04
-#define KEY_W 0X02
-#define KEY_2 0X01
-#define KEY_TAB 0X01
+#define KEY_ALT 0x80
+#define KEY_L 0x40
+#define KEY_Z 0x20
+#define KEY_O 0x10
+#define KEY_9 0x08
+#define KEY_S 0x04
+#define KEY_W 0x02
+#define KEY_2 0x01
+#define KEY_TAB 0x01
 // 2
-#define KEY_M 0X80
-#define KEY_K 0X40
-#define KEY_X 0X20
-#define KEY_I 0X10
-#define KEY_8 0X08
-#define KEY_ARROW_RIGHT 0X08
-#define KEY_D 0X04
-#define KEY_E 0X02
-#define KEY_3 0X01
-#define KEY_NORM 0X01
+#define KEY_M 0x80
+#define KEY_K 0x40
+#define KEY_X 0x20
+#define KEY_I 0x10
+#define KEY_8 0x08
+#define KEY_ARROW_RIGHT 0x08
+#define KEY_D 0x04
+#define KEY_E 0x02
+#define KEY_3 0x01
+#define KEY_NORM 0x01
 // 3
-#define KEY_N 0X80
-#define KEY_J 0X40
-#define KEY_C 0X20
-#define KEY_U 0X10
-#define KEY_7 0X08
-#define KEY_ARROW_UP 0X08
-#define KEY_F 0X04
-#define KEY_R 0X02
-#define KEY_4 0X01
-#define KEY_INV 0X01
+#define KEY_N 0x80
+#define KEY_J 0x40
+#define KEY_C 0x20
+#define KEY_U 0x10
+#define KEY_7 0x08
+#define KEY_ARROW_UP 0x08
+#define KEY_F 0x04
+#define KEY_R 0x02
+#define KEY_4 0x01
+#define KEY_INV 0x01
 // 4
-#define KEY_B 0X80
-#define KEY_H 0X40
-#define KEY_V 0X20
-#define KEY_Y 0X10
-#define KEY_6 0X08
-#define KEY_ARROW_DOWN 0X08
-#define KEY_G 0X04
-#define KEY_T 0X02
-#define KEY_5 0X01
-#define KEY_ARROW_LEFT 0X01
+#define KEY_B 0x80
+#define KEY_H 0x40
+#define KEY_V 0x20
+#define KEY_Y 0x10
+#define KEY_6 0x08
+#define KEY_ARROW_DOWN 0x08
+#define KEY_G 0x04
+#define KEY_T 0x02
+#define KEY_5 0x01
+#define KEY_ARROW_LEFT 0x01
 
+
+// ROWS //
+// 0
+#define ROW_KEY_SPACE 0
+#define ROW_KEY_INTRO 0
+#define ROW_KEY_SHIFT 0
+#define ROW_KEY_P 0
+#define ROW_KEY_0 0
+#define ROW_KEY_A 0
+#define ROW_KEY_Q 0
+#define ROW_KEY_1 0
+#define ROW_KEY_ESC 0
+// 1
+#define ROW_KEY_ALT 1
+#define ROW_KEY_L 1
+#define ROW_KEY_Z 1
+#define ROW_KEY_O 1
+#define ROW_KEY_9 1
+#define ROW_KEY_S 1
+#define ROW_KEY_W 1
+#define ROW_KEY_2 1
+#define ROW_KEY_TAB 1
+// 2
+#define ROW_KEY_M 2
+#define ROW_KEY_K 2
+#define ROW_KEY_X 2
+#define ROW_KEY_I 2
+#define ROW_KEY_8 2
+#define ROW_KEY_ARROW_RIGHT 2
+#define ROW_KEY_D 2
+#define ROW_KEY_E 2
+#define ROW_KEY_3 2
+#define ROW_KEY_NORM 2
+// 3
+#define ROW_KEY_N 3
+#define ROW_KEY_J 3
+#define ROW_KEY_C 3
+#define ROW_KEY_U 3
+#define ROW_KEY_7 3
+#define ROW_KEY_ARROW_UP 3
+#define ROW_KEY_F 3
+#define ROW_KEY_R 3
+#define ROW_KEY_4 3
+#define ROW_KEY_INV 3
+// 4
+#define ROW_KEY_B 4
+#define ROW_KEY_H 4
+#define ROW_KEY_V 4
+#define ROW_KEY_Y 4
+#define ROW_KEY_6 4
+#define ROW_KEY_ARROW_DOWN 4
+#define ROW_KEY_G 4
+#define ROW_KEY_T 4
+#define ROW_KEY_5 4
+#define ROW_KEY_ARROW_LEFT 4
 
 
 #endif
