@@ -52,6 +52,20 @@
 .endproc
 
 .proc _waitStart: near
+    loop2:
+    LDA GAMEPAD_VALUE1
+    AND #%11000000
+    BNE loop2
+    loop3:
+    LDA GAMEPAD_VALUE2
+    AND #%11000000
+    BNE loop3
+    loop4:
+    LDA KEYBOARD_CACHE
+    AND #$40
+    BNE loop4
+    
+    
     loop:
     BIT GAMEPAD_VALUE1
     BMI exit_loop
