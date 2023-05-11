@@ -11,6 +11,7 @@
 .export _readGamepad
 .export _readKeyboard
 .export _waitStart
+.export _waitButton
 .export _waitFrames
 .export _halt
 .export _calculate_coords
@@ -76,6 +77,23 @@
     LDA KEYBOARD_CACHE
     AND #$40
     BNE exit_loop
+    BRA loop
+    exit_loop:
+    RTS
+.endproc
+
+.proc _waitButton: near
+    loop2:
+    LDA GAMEPAD_VALUE1
+    AND #%10100000
+    BNE loop2
+    
+    loop:
+    
+    LDA GAMEPAD_VALUE1
+    AND #%10100000
+    BNE exit_loop
+    
     BRA loop
     exit_loop:
     RTS
