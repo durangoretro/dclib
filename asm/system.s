@@ -83,15 +83,30 @@
 .endproc
 
 .proc _waitButton: near
+    ; wait release action buttons both controllers
     loop2:
     LDA GAMEPAD_VALUE1
+    ORA GAMEPAD_VALUE2
     AND #%10100000
     BNE loop2
     
-    loop:
+    ; Wait release space key
+    loop3:
+    LDA KEYBOARD_CACHE
+    AND #$80
+    BNE loop3
     
+    
+    loop:
+    ; Wait action buttons any controller
     LDA GAMEPAD_VALUE1
     AND #%10100000
+    BNE exit_loop
+    
+    ; Wait space key
+    loop4:
+    LDA KEYBOARD_CACHE
+    AND #$80
     BNE exit_loop
     
     BRA loop
