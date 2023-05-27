@@ -2,6 +2,7 @@
 .PC02
 
 .export coords2mem
+.export readchar
 
 .proc coords2mem: near
     ; Calculate Y coord
@@ -22,5 +23,10 @@
     BCC skip_upper
     INC VMEM_POINTER+1
     skip_upper:
+    RTS
+.endproc
+
+.proc readchar: near
+    LDA #$42
     RTS
 .endproc

@@ -5,6 +5,7 @@
 .import incsp8
 .import incsp2
 .import coords2mem
+.import readchar
 
 .export _printBCD
 .export _printStr
@@ -143,7 +144,11 @@
     STA PAPER        
 
     ; Calculate coords
-    JSR coords2mem
+    JSR coords2mem    
+    LDX VMEM_POINTER
+	STX TEMP5
+	LDX VMEM_POINTER+1
+	STX TEMP6
 	STZ TEMP1
     
     ; String pointer
@@ -162,6 +167,18 @@
     STA (DATA_POINTER),Y
 	
     JSR draw_str
+    rloop:
+    JSR readchar
+    BEQ rloop
+    LDY #0
+    STA (DATA_POINTER),Y
+    
+    LDX TEMP5
+	STX VMEM_POINTER
+	LDX TEMP6
+	STX VMEM_POINTER+1
+    JSR draw_str
+    
     end: bra end
     JMP incsp8	
 .endproc
