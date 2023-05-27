@@ -3,6 +3,7 @@
 
 .export coords2mem
 .export readchar
+.export keyrow1
 
 .proc coords2mem: near
     ; Calculate Y coord
@@ -27,6 +28,22 @@
 .endproc
 
 .proc readchar: near
-    LDA #$42
+    LDX KEYBOARD_CACHE
+    LDA keyrow1,X
     RTS
 .endproc
+
+
+;#define KEY_SPACE 0x80
+;#define KEY_INTRO 0x40
+;#define KEY_SHIFT 0x20
+;#define KEY_P 0x10
+;#define KEY_0 0x08
+;#define KEY_A 0x04
+;#define KEY_Q 0x02
+;#define KEY_1 0x01
+
+
+keyrow1: 
+;      00  01  02  03  04  05  06  07  08  09  0a  0b  0c  0d  0e 0f
+.byte $00,$41,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
