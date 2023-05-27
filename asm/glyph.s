@@ -179,7 +179,7 @@
 	STX VMEM_POINTER+1
     JSR draw_str
     
-    end: bra end
+    end: bra rloop
     JMP incsp8	
 .endproc
 
