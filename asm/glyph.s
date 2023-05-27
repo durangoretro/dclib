@@ -8,6 +8,7 @@
 
 .export _printBCD
 .export _printStr
+.export _readStr
 
 ; unsigned char x, unsigned char y, void* font, unsigned char color, unsigned char paper, long (4 bytes) value
 ; Font 5x8
@@ -109,9 +110,60 @@
     STA DATA_POINTER
 	
     JSR draw_str
-    JMP incsp8
+    JMP incsp8	
+.endproc
+
+.proc  _readStr: near
+    ; Load X coord
+    LDY #7
+    LDA (sp), Y
+    STA X_COORD    
+    
+    ; Load Y coord
+    DEY
+    LDA (sp), Y
+    STA Y_COORD
+    
+    ; Load font
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER+1    
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER
+    
+    ; Load color
+    DEY
+    LDA (sp), Y
+    STA COLOUR
+    
+    ; Load paper
+    DEY
+    LDA (sp), Y
+    STA PAPER        
+
+    ; Calculate coords
+    JSR coords2mem
+	STZ TEMP1
+    
+    ; String pointer
+    LDY #1
+    LDA (sp), Y
+    STA DATA_POINTER+1
+    LDY #0
+    LDA (sp), Y
+    STA DATA_POINTER
+    
+    LDY #0
+    LDA #$5f
+    STA (DATA_POINTER),Y
+    INY
+    LDA #0
+    STA (DATA_POINTER),Y
 	
-	
+    JSR draw_str
+    end: bra end
+    JMP incsp8	
 .endproc
 
 .proc draw_byte: near
