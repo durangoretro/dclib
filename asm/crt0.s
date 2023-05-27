@@ -41,6 +41,18 @@ _init:
     ; Clean video mode
     LDA #$30
     STA VIDEO_MODE
+    ; Clean screen
+    LDA #$00
+    LDX #$60
+    STX $01
+    LDY #$00
+    STY $00
+    loopcs:
+    STA ($00), Y
+    INY
+    BNE loopcs
+	INC $01
+    BPL loopcs
     
     ; Display some splash screen
     
