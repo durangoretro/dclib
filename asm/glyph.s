@@ -157,6 +157,7 @@
     STA DATA_POINTER
     ; Initialize string
     LDY #1
+    nextchar:
     LDA #0
     STA (DATA_POINTER),Y
     STY X2_COORD
@@ -187,6 +188,15 @@
     PHY
     JSR draw_str
     PLY
+    LDX TEMP5
+	STX VMEM_POINTER
+	LDX TEMP6
+	STX VMEM_POINTER+1
+    
+    ; Next char
+    INY
+    INY
+    bra nextchar
     
     end: bra end
     JMP incsp8	
