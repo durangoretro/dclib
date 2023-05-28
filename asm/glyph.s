@@ -178,6 +178,8 @@
     rloop:
     JSR readchar
     BEQ rloop
+    CMP #$0A
+    BEQ end
     STA (DATA_POINTER),Y
     
     ; Update string in screen
@@ -198,7 +200,7 @@
     INY
     bra nextchar
     
-    end: bra end
+    end:
     JMP incsp8	
 .endproc
 
