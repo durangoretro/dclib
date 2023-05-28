@@ -62,10 +62,7 @@
     LDA (sp), Y
 	jsr draw_byte
 	
-	;LDA #$11
-	;jsr draw_byte
-	
-    JSR incsp8
+	JSR incsp8
     JMP incsp2
 .endproc
 
