@@ -201,6 +201,8 @@
     bra nextchar
     
     end:
+    LDA #0
+    STA (DATA_POINTER),Y
     JMP incsp8	
 .endproc
 
