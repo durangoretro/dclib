@@ -156,15 +156,18 @@
     LDA (sp), Y
     STA DATA_POINTER
     ; Initialize string
-    LDY #0
-    LDA #$5f
-    STA (DATA_POINTER),Y
-    INY
+    LDY #1
     LDA #0
     STA (DATA_POINTER),Y
     STY X2_COORD
+    DEY
+    LDA #$5f
+    STA (DATA_POINTER),Y  
+    
     ; Draw string    	
+    PHY
     JSR draw_str
+    PLY
     
     ; Wait clean keyboard
     cloop:
@@ -174,7 +177,7 @@
     rloop:
     JSR readchar
     BEQ rloop
-    LDY #0
+    ;LDY #0
     STA (DATA_POINTER),Y
     
     ; Update string in screen
