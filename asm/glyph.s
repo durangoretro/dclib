@@ -177,7 +177,6 @@
     rloop:
     JSR readchar
     BEQ rloop
-    ;LDY #0
     STA (DATA_POINTER),Y
     
     ; Update string in screen
@@ -185,7 +184,9 @@
 	STX VMEM_POINTER
 	LDX TEMP6
 	STX VMEM_POINTER+1
+    PHY
     JSR draw_str
+    PLY
     
     end: bra end
     JMP incsp8	
