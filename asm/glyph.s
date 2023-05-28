@@ -155,28 +155,36 @@
     LDY #0
     LDA (sp), Y
     STA DATA_POINTER
-    
+    ; Initialize string
     LDY #0
     LDA #$5f
     STA (DATA_POINTER),Y
     INY
     LDA #0
     STA (DATA_POINTER),Y
-	
+    STY X2_COORD
+    ; Draw string    	
     JSR draw_str
+    
+    ; Wait clean keyboard
+    cloop:
+    JSR readchar
+    BNE cloop
+    ; Wait pushed key
     rloop:
     JSR readchar
     BEQ rloop
     LDY #0
     STA (DATA_POINTER),Y
     
+    ; Update string in screen
     LDX TEMP5
 	STX VMEM_POINTER
 	LDX TEMP6
 	STX VMEM_POINTER+1
     JSR draw_str
     
-    end: bra rloop
+    end: bra end
     JMP incsp8	
 .endproc
 

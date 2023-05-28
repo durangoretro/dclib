@@ -51,8 +51,6 @@
     
     end:
     RTS
-    
-    
 .endproc
 
 .segment  "RODATA"
