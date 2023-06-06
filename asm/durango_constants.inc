@@ -34,31 +34,32 @@ BUILD_HASH = $C0E6
 ; ---------------------------------------------------------------------------
 VMEM_POINTER = $10 ; $11
 DATA_POINTER = $12 ; $13
-X_COORD = $14
-Y_COORD = $15
-HEIGHT = $16
-WIDTH = $17
-RESOURCE_POINTER = $18 ; $19
-X2_COORD = $1A
-Y2_COORD = $1B
-X3_COORD = $1C
-Y3_COORD = $1D
-X4_COORD = $1E
-Y4_COORD = $1F
-COLOUR = $20
-PAPER = $21
-BACKGROUND_POINTER = $22; $23
-TEMP1 = $24
-TEMP2 = $25
-TEMP3 = $26
-TEMP4 = $27
-RANDOM_SEED = $28; 29
-TEMP5 = $2A
-TEMP6 = $2B
-TEMP7 = $2C
-TEMP8 = $2D
-HEIGHT2 = $2E
-WIDTH2 = $2F
+RESOURCE_POINTER = $14 ; $15
+BACKGROUND_POINTER = $16; $17
+RANDOM_SEED = $18; $19
+COLOUR = $1A
+PAPER = $1B
+X_COORD = $1C
+Y_COORD = $1D
+X2_COORD = $1E
+Y2_COORD = $1F
+X3_COORD = $20
+Y3_COORD = $21
+X4_COORD = $22
+Y4_COORD = $23
+HEIGHT = $24
+WIDTH = $25
+HEIGHT2 = $26
+WIDTH2 = $27
+TEMP1 = $28
+TEMP2 = $29
+TEMP3 = $2A
+TEMP4 = $2B
+TEMP5 = $2C
+TEMP6 = $2D
+TEMP7 = $2E
+TEMP8 = $2F
+
 
 ; ---------------------------------------------------------------------------
 ; DURANGO LIB MEMORY CONSTANTS ($0200-$02FF)
