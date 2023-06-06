@@ -172,11 +172,15 @@
     
     ; Wait clean keyboard
     cloop:
+    PHY
     JSR readchar
+    PLY
     BNE cloop
     ; Wait pushed key
     rloop:
+    PHY
     JSR readchar
+    PLY
     BEQ rloop
     CMP #$0A
     BEQ end
