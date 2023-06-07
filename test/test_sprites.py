@@ -1,13 +1,13 @@
 import durango_testing
 
-X_COORD  = 0x14
-Y_COORD  = 0x15
-X2_COORD = 0x1A
-Y2_COORD = 0x1B
-X3_COORD = 0x1C
-Y3_COORD = 0x1D
-X4_COORD = 0x1E
-Y4_COORD = 0x1F
+X_COORD  = 0x1C
+Y_COORD  = 0x1D
+X2_COORD = 0x1E
+Y2_COORD = 0x1F
+X3_COORD = 0x20
+Y3_COORD = 0x21
+X4_COORD = 0x22
+Y4_COORD = 0x23
 
 def test_answer():
     # 2 right to 1
