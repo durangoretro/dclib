@@ -3,6 +3,7 @@
 
 .importzp sp
 .import incsp8
+.import incsp1
 .import incsp2
 .import coords2mem
 .import readchar
@@ -113,7 +114,7 @@
 
 .proc  _readStr: near
     ; Load X coord
-    LDY #7
+    LDY #8
     LDA (sp), Y
     STA X_COORD    
     
@@ -138,7 +139,12 @@
     ; Load paper
     DEY
     LDA (sp), Y
-    STA PAPER        
+    STA PAPER
+    
+    ; Load max width
+    DEY
+    LDA (sp), Y
+    STA WIDTH        
 
     ; Calculate coords
     JSR coords2mem    
@@ -149,10 +155,10 @@
 	STZ TEMP1
     
     ; String pointer
-    LDY #1
+    LDY #2
     LDA (sp), Y
     STA DATA_POINTER+1
-    LDY #0
+    LDY #1
     LDA (sp), Y
     STA DATA_POINTER
     ; Initialize string
@@ -207,7 +213,8 @@
     end:
     LDA #0
     STA (DATA_POINTER),Y
-    JMP incsp8	
+    JSR incsp8
+    JMP incsp1	
 .endproc
 
 .proc draw_byte: near
