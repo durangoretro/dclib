@@ -20,6 +20,7 @@ extern void __fastcall__ getBuildVersion(char*);
 extern void __fastcall__ random_init(int);
 extern unsigned char __fastcall__ random(void);
 extern void __fastcall__ clear_screen(void);
+extern void __cdecl__ copyMem(void *dest, void *source, char size);
 
 // Gamepad keys
 #define BUTTON_A 0x80

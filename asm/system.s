@@ -4,6 +4,7 @@
 
 .importzp  sp
 .import incsp1
+.import incsp5
 .import coords2mem
 
 .export _setHiRes
@@ -24,6 +25,7 @@
 .export _random_init
 .export _random
 .export _clear_screen
+.export _copyMem
 
 .proc _setHiRes: near
 	CMP #0
@@ -451,4 +453,38 @@
 	INC VMEM_POINTER+1
     BPL loop
     RTS
+.endproc
+
+
+.proc  _copyMem: near
+    ; Load dest
+    LDY #4
+    LDA (sp), Y
+    STA DATA_POINTER+1    
+    DEY
+    LDA (sp), Y
+    STA DATA_POINTER
+    
+    ; Load source
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER+1    
+    DEY
+    LDA (sp), Y
+    STA RESOURCE_POINTER
+    
+    ; Load size
+    DEY
+    LDA (sp), Y
+    TAY
+    DEY
+    
+    loop:
+    LDA (RESOURCE_POINTER),Y
+    STA (DATA_POINTER),Y
+    DEY
+    BPL loop
+    
+    
+    JMP incsp5	
 .endproc
