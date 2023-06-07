@@ -142,7 +142,7 @@
     STA PAPER
     
     ; Load max width
-    DEY
+    LDY #0
     LDA (sp), Y
     STA WIDTH        
 
@@ -208,7 +208,8 @@
     ; Next char
     INY
     INY
-    bra nextchar
+    CPY #8
+    BCC nextchar
     
     end:
     LDA #0
