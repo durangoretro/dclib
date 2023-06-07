@@ -65,13 +65,13 @@
 .segment  "RODATA"
 
 keymap:
-;   SPACE, INTRO, SHIFT, P, O, A, Q, 1
+; SPACE, INTRO, SHIFT, P,  O,   A,   Q,   1
 .byte $20, $0a, $00, $50, $30, $41, $51, $31
-;   ALT, L, Z, 0, 9, S, W, 2
+;   ALT,    L,   Z,   0,   9,   S,   W,   2
 .byte $00, $4c, $5a, $4f, $39, $53, $57, $32
-;   M, K, X, I, 8, D, E, 3
-.byte $4d, $4b, $58, $49, $38, $44, $44, $33
-;   N, J, C, U, 7, F, R, 4
+;      M,   K,   X,   I,  8,    D,   E,   3
+.byte $4d, $4b, $58, $49, $38, $44, $45, $33
+;      N,   J,   C,   U,   7,   F,   R,   4
 .byte $4e, $4a, $43, $55, $37, $46, $52, $34
-;  B, H, V, Y, 6, G, T, 5
+;      B,   H,   V,   Y,   6,   G,   T,   5
 .byte $42, $48, $56, $59, $36, $47, $54, $35
