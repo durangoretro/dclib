@@ -61,7 +61,8 @@ _init:
 sum		= $00			; included as output parameters
 chk		= $01				; sum of sums
 sysptr  = $02
-reset   = $C000
+;reset   = $C000 ; 16K
+reset   = $8000 ; 32K
 
 ; *** compute checksum *** initial setup is 12b, 16t
 	LDX #>reset				; start page as per interface (MUST be page-aligned!)
@@ -340,7 +341,8 @@ hw_nmi_int:
 .byt "DD"
 ;]
 ;FILEZISE[
-.byt $00,$40,$00,$00
+;.byt $00,$40,$00,$00 ; 16K
+.byt $00,$80,$00,$00 ; 32K
 ;]
 
 ; ---------------------------------------------------------------------------
