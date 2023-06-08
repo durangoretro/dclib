@@ -7,7 +7,7 @@
 .import   _main
 
 .export   __STARTUP__ : absolute = 1        ; Mark as startup
-.import __STACKSTART__, __STACKSIZE__, __ROM_START__, __ROM_SIZE__
+.import __STACKSTART__, __STACKSIZE__, __ROM_START__
 .import    copydata, zerobss, initlib, donelib
 .include "../asm/durango_constants.inc"
 .include "zeropage.inc"
