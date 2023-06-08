@@ -176,20 +176,23 @@
     JSR draw_str
     PLY
     
-    ; Wait clean keyboard
-    cloop:
+    ; Push Y
     PHY
+    ; Wait clean keyboard
+    cloop:    
     JSR readchar
-    PLY
     BNE cloop
     ; Wait pushed key
     rloop:
-    PHY
     JSR readchar
-    PLY
     BEQ rloop
+    ; Restore Y
+    PLY
+    
+    ; If \0, then return
     CMP #$0A
-    BEQ end
+    BEQ end    
+    ; Save char in string
     STA (DATA_POINTER),Y
     
     ; Update string in screen
