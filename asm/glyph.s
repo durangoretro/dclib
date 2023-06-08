@@ -12,6 +12,8 @@
 .export _printStr
 .export _readStr
 
+.segment  "CODE"
+
 ; unsigned char x, unsigned char y, void* font, unsigned char color, unsigned char paper, long (4 bytes) value
 ; Font 5x8
 .proc _printBCD: near
