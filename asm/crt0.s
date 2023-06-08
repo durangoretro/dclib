@@ -7,7 +7,7 @@
 .import   _main
 
 .export   __STARTUP__ : absolute = 1        ; Mark as startup
-.import __STACKSTART__, __STACKSIZE__
+.import __STACKSTART__, __STACKSIZE__, __ROM_START__, __ROM_SIZE__
 .import    copydata, zerobss, initlib, donelib
 .include "../asm/durango_constants.inc"
 .include "zeropage.inc"
@@ -62,7 +62,8 @@ sum		= $00			; included as output parameters
 chk		= $01				; sum of sums
 sysptr  = $02
 ;reset   = $C000 ; 16K
-reset   = $8000 ; 32K
+;reset   = $8000 ; 32K
+reset = __ROM_START__
 
 ; *** compute checksum *** initial setup is 12b, 16t
 	LDX #>reset				; start page as per interface (MUST be page-aligned!)
