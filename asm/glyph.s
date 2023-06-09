@@ -114,6 +114,8 @@
     JMP incsp8	
 .endproc
 
+; 8  7   6,5    4      3      2,1   0  
+; x, y, font, color, paper, value, max
 .proc  _readStr: near
     ; Load X coord
     LDY #8
@@ -213,7 +215,7 @@
     ; Next char
     INY
     INY
-    CPY #8
+    CPY WIDTH
     BCC nextchar
     
     end:
