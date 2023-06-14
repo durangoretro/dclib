@@ -75,7 +75,7 @@
 	DEY
 	BNE LAB_BCYC		; total 19t per iteration
 	DEX
-	STX IOBeep			; toggle speaker
+	STX IOBEEP			; toggle speaker
 	BNE LAB_BLNG
 	DEC X_COORD			; repeat until desired length
 	BNE LAB_BRPT
@@ -93,7 +93,7 @@
 	DEY
 	BNE LAB_BCYCS		; total 19t per iteration
 	DEX
-	STZ IOBeep			; toggle speaker
+	STZ IOBEEP			; toggle speaker
 	BNE LAB_BLNGS
 	DEC X_COORD			; repeat until desired length
 	BNE LAB_BRPTS
