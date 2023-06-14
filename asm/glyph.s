@@ -114,6 +114,8 @@
     JMP incsp8	
 .endproc
 
+; 8  7   6,5    4      3      2,1   0  
+; x, y, font, color, paper, value, max
 .proc  _readStr: near
     ; Load X coord
     LDY #8
@@ -143,8 +145,16 @@
     LDA (sp), Y
     STA PAPER
     
+    ; String pointer
+    DEY
+    LDA (sp), Y
+    STA DATA_POINTER+1
+    DEY
+    LDA (sp), Y
+    STA DATA_POINTER
+    
     ; Load max width
-    LDY #0
+    DEY
     LDA (sp), Y
     STA WIDTH        
 
@@ -156,13 +166,7 @@
 	STX TEMP6
 	STZ TEMP1
     
-    ; String pointer
-    LDY #2
-    LDA (sp), Y
-    STA DATA_POINTER+1
-    LDY #1
-    LDA (sp), Y
-    STA DATA_POINTER
+    
     ; Initialize string
     LDY #1
     nextchar:
@@ -213,7 +217,7 @@
     ; Next char
     INY
     INY
-    CPY #8
+    CPY WIDTH
     BCC nextchar
     
     end:
