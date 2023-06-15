@@ -8,6 +8,7 @@
 .import coords2mem
 
 .export _setHiRes
+.export _setInvert
 .export _waitVSync
 .export _readGamepad
 .export _readKeyboard
@@ -27,6 +28,8 @@
 .export _clear_screen
 .export _copyMem
 
+; [HiRes Invert S1 S0    RGB LED NC NC]
+
 .proc _setHiRes: near
 	CMP #0
 	BNE hires
@@ -41,6 +44,24 @@
 	end:
 	RTS
 .endproc
+
+.proc _setInvert: near
+	CMP #0
+	BNE hires
+	LDA VIDEO_MODE
+    ORA #%00001111
+	AND #%10111111
+	STA VIDEO_MODE
+	BRA end
+	hires:
+	LDA VIDEO_MODE
+    ORA #%01001111
+	STA VIDEO_MODE
+	end:
+	RTS
+.endproc
+    
+    
 
 .proc _waitVSync: near
     ; Wait for vsync end.

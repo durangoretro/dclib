@@ -3,6 +3,7 @@
 
 /* System procedures */
 extern void __fastcall__ setHiRes(unsigned char);
+extern void __fastcall__ setInvert(unsigned char);
 extern void __fastcall__ waitVSync(void);
 extern void __fastcall__ waitStart(void);
 extern void __fastcall__ waitButton(void);
