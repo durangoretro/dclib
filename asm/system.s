@@ -6,6 +6,7 @@
 .import incsp1
 .import incsp5
 .import coords2mem
+.import readchar
 
 .export _setHiRes
 .export _setInvert
@@ -27,6 +28,7 @@
 .export _random
 .export _clear_screen
 .export _copyMem
+.export _getchar
 
 ; [HiRes Invert S1 S0    RGB LED NC NC]
 
@@ -508,4 +510,16 @@
     
     
     JMP incsp5	
+.endproc
+
+.proc _getchar: near
+    ; Wait clean keyboard
+    cloop:    
+    JSR readchar
+    BNE cloop
+    ; Wait pushed key
+    rloop:
+    JSR readchar
+    BEQ rloop
+    RTS
 .endproc

@@ -10,6 +10,7 @@ extern void __fastcall__ waitButton(void);
 extern void __fastcall__ waitFrames(unsigned char);
 extern unsigned char __fastcall__ readGamepad(unsigned char);
 extern unsigned char __fastcall__ readKeyboard(unsigned char);
+extern char __fastcall__ getchar(void);
 extern void __fastcall__ halt(void);
 extern void __fastcall__ calculate_coords(void*);
 extern unsigned char __fastcall__ read_keyboard_row(unsigned char);
