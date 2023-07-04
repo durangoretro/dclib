@@ -64,11 +64,14 @@ $(BUILD_DIR)/music.lib: $(BUILD_DIR)/music.o $(BUILD_DIR)
 	ar65 r $(BUILD_DIR)/music.lib $(BUILD_DIR)/music.o
 
 
-$(BUILD_DIR)/pocket_crt0.o: $(ASM_DIR)/pocket_crt0.s $(BUILD_DIR)
-	cp $(ASM_DIR)/pocket_crt0.s $(BUILD_DIR)/pocket_crt0.s && java -jar ${RESCOMP} -m STAMP -n DCLIB -o $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -i $(BUILD_DIR)/pocket_crt0.s && ca65 -t none $(BUILD_DIR)/pocket_crt0.s -o $(BUILD_DIR)/pocket_crt0.o
+$(BUILD_DIR)/pocket: $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/pocket
+
+$(BUILD_DIR)/pocket/crt0.o: $(ASM_DIR)/pocket_crt0.s $(BUILD_DIR)/pocket
+	cp $(ASM_DIR)/pocket_crt0.s $(BUILD_DIR)/pocket/crt0.s && java -jar ${RESCOMP} -m STAMP -n DCLIB -o $$(git log -1 | head -1 | sed 's/commit //' | cut -c1-8) -i $(BUILD_DIR)/pocket/crt0.s && ca65 -t none $(ASM_DIR)/pocket_crt0.s -o $(BUILD_DIR)/pocket/crt0.o
 	
-$(BUILD_DIR)/pocket.lib: $(BUILD_DIR)/pocket_crt0.o $(BUILD_DIR)
-	cp /usr/share/cc65/lib/supervision.lib $(BUILD_DIR)/pocket.lib && ar65 a $(BUILD_DIR)/pocket.lib $(BUILD_DIR)/pocket_crt0.o
+$(BUILD_DIR)/pocket.lib: $(BUILD_DIR)/pocket/crt0.o $(BUILD_DIR)/pocket
+	cp /usr/share/cc65/lib/supervision.lib $(BUILD_DIR)/pocket.lib && ar65 a $(BUILD_DIR)/pocket.lib $(BUILD_DIR)/pocket/crt0.o
 
 clean:
 	rm -Rf $(BUILD_DIR) $(INC_DIR)/font.h
