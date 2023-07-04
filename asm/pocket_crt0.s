@@ -202,7 +202,7 @@ hw_nmi_int:
 
 ; 8 bytes
 .byt $00
-.byt "dX"
+.byt "dP"
 .byt "****"
 .byt $0d
 
@@ -244,13 +244,7 @@ hw_nmi_int:
 ; SEGMENT METADATA
 ; ---------------------------------------------------------------------------
 .segment "METADATA"
-.byt "################################"
-.byt "################################"
 .byt "SIGNATURE:[##]$$"
 .byt "DCLIB:[########]"
 .byt "BUILD:[########]"
 .byt "######DmOS######"
-.byt "#"
-; Dev-Cart JMP at $FFE1
-JMP($FFFC)
-.byt "############"
