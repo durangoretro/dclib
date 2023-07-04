@@ -38,19 +38,8 @@ _init:
     LDX #$FF ; Initialize stack pointer to $01FF
     TXS
     
-    ; Clean up RAM
-    LDA #$00
-    LDX #$00
-    STX $01
-    LDY #$02
-    STY $00
-    loopcm:
-    STA ($00), Y
-    INY
-    BNE loopcm
-	INC $01
-    BPL loopcm
-   
+    ; Clean up RAM ????
+    
     ; Initialize cc65 stack pointer
     LDA #<(__STACKSTART__ + __STACKSIZE__)
     STA sp
@@ -119,32 +108,9 @@ _irq_int:
     BNE next
     INC $0209
     next:
-    ; Read controllers
-    STA GAMEPAD1
-    LDX #8
-    loop2:
-    STA GAMEPAD2
-    DEX
-    BNE loop2
-    LDA GAMEPAD1
-    EOR GAMEPAD_MODE1
-    STA GAMEPAD_VALUE1
-    LDA GAMEPAD2
-    EOR GAMEPAD_MODE2
-    STA GAMEPAD_VALUE2
     
-    ; Read keyboard
-    LDX #4
-    LDA #%00010000
-    keyboard_loop:
-    STA KEYBOARD
-    PHA
-    LDA KEYBOARD
-    STA KEYBOARD_CACHE,X
-    PLA
-    LSR
-    DEX
-    BPL keyboard_loop
+	; Read buttons
+    
     
     ; Restore registers and return
     PLY
@@ -154,46 +120,7 @@ _irq_int:
 
 ; Non-maskable interrupt (NMI) service routine
 _nmi_int:
-    PHA
-    PHX
-    
-    LDA VIDEO_MODE
-    AND #$30
-    CMP #$30
-    BEQ case_0
-    CMP #$00
-    BEQ case_1
-    CMP #$10
-    BEQ case_2
-    CMP #$20
-    BEQ case_3
-    
-    case_0:
-    LDX #$88
-    BRA case_end
-    case_1:
-    LDX #$98
-    BRA case_end
-    case_2:
-    LDX #$A8
-    BRA case_end
-    case_3:
-    LDX #$3C
-    BRA case_end
-    
-    case_end:
-    STX VIDEO_MODE
-    
-    PLX
-    PLA
     RTI
-
-hw_irq_int:
-    JMP (IRQ_ADDR)
-    
-hw_nmi_int:
-    JMP (NMI_ADDR)
-
 
 ; ---------------------------------------------------------------------------
 ; SEGMENT DXHEAD
