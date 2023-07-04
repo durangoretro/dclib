@@ -74,6 +74,10 @@ _init:
     LDA #$01
     STA INT_ENABLE
     CLI
+
+	; Initialize Durango Video
+    LDA #$30
+    STA VIDEO_MODE
     
     ; Call main()
     JSR _main
