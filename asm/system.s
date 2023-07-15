@@ -3,6 +3,7 @@
 .PC02
 
 .importzp  sp
+.importzp sreg
 .import incsp1
 .import incsp5
 .import coords2mem
@@ -30,6 +31,7 @@
 .export _copyMem
 .export _getchar
 .export _draw_image
+.export _get_time
 
 ; [HiRes Invert S1 S0    RGB LED NC NC]
 
@@ -584,3 +586,14 @@
     rle_exit:
     RTS
 .endproc
+
+.proc _get_time: near
+    LDA INT_COUNTER+3
+	STA sreg+1
+	LDA INT_COUNTER+2
+	STA sreg
+	LDX INT_COUNTER+1
+	LDA INT_COUNTER
+	RTS
+.endproc
+

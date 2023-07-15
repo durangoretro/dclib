@@ -210,13 +210,13 @@ _irq_int:
     AND #$10
     BNE _stop
     ; Increment interrupt counter
-    INC $0206
+    INC INT_COUNTER
     BNE next
-    INC $0207
+    INC INT_COUNTER+1
     BNE next
-    INC $0208
+    INC INT_COUNTER+2
     BNE next
-    INC $0209
+    INC INT_COUNTER+3
     next:
     ; Read controllers
     STA GAMEPAD1
