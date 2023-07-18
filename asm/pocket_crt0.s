@@ -133,8 +133,11 @@ _nmi_int:
 
 ; 8 bytes
 .byt $00
-.byt "dP"
-.byt "****"
+.byt "pX"
+; Load addr
+.byt $00, $20
+; Run addr
+.byt $00, $21
 .byt $0d
 
 ; 222 bytes
