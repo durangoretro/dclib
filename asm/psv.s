@@ -70,7 +70,7 @@
 
 .proc  _consoleLogLong: near
     ; Set virtual serial port in hex mode
-    ;LDY #VSP_INT32
+    LDY #VSP_INT32
 	STY VSP_CONFIG
     ; Send value to virtual serial port
     STA VSP
